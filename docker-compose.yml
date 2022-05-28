@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  client:
+    restart: on-failure
+    image: moscityhack_client
+    ports:
+      - "127.0.0.1:4000:80"
+    build: .
