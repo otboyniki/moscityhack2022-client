@@ -1,6 +1,7 @@
 import URI from 'urijs';
 
 import { BASE_URL } from '@/constants/env';
+import routes from '@/constants/routes';
 
 const fetchy = async (url, body, options) => {
   const baseOptions = body
@@ -17,6 +18,12 @@ const fetchy = async (url, body, options) => {
     ...baseOptions,
     ...options,
   });
+
+  if (response.status === 401) {
+    window.location.href = routes.login;
+
+    return undefined;
+  }
 
   if (!response.ok) {
     throw response;

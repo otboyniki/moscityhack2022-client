@@ -215,8 +215,6 @@ function* confirmRegistration() {
 
     yield put(AuthActions.confirmRegistrationSuccess());
 
-    localStorage.setItem('isAuthorized', true);
-
     history.push(routes.main);
   } catch (e) {
     console.warn(e);
