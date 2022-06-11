@@ -4,4 +4,6 @@ export default {
   registrationOrganizer: '/registration/organizer',
   quickRegistration: '/fast-registration',
   registrationConfirm: '/fast-registration/confirm',
+  activities: '/activities',
+  stories: '/stories',
 };

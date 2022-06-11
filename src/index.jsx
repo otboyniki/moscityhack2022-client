@@ -11,8 +11,6 @@ import {
 
 import { CssBaseline } from '@mui/material';
 
-import history from '@/helpers/history';
-
 import store from '@/redux/store';
 
 import Main from '@/pages/Main';
@@ -20,9 +18,13 @@ import Registration from '@/pages/Registration';
 import Login from '@/pages/Login';
 import QuickRegistration from '@/pages/QuickRegistration';
 import RegistrationConfirm from '@/pages/RegistrationConfirm';
+import AddStory from '@/pages/AddStory';
 
 import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
+import AuthorizedRoute from '@/components/AuthorizedRoute';
+
+import history from '@/helpers/history';
 
 import routes from '@/constants/routes';
 
@@ -32,21 +34,24 @@ const App = () => (
     <Notifications />
 
     <Switch>
-      <NonAuthorizedRoute exact path={routes.login}>
+      <Route exact path={routes.login}>
         <Login />
-      </NonAuthorizedRoute>
+      </Route>
       <NonAuthorizedRoute exact path={routes.registration}>
         <Registration />
       </NonAuthorizedRoute>
       <NonAuthorizedRoute exact path={routes.quickRegistration}>
         <QuickRegistration />
       </NonAuthorizedRoute>
-      <NonAuthorizedRoute exact path={routes.registrationConfirm}>
+      <Route exact path={routes.registrationConfirm}>
         <RegistrationConfirm />
-      </NonAuthorizedRoute>
+      </Route>
       <Route exact path={routes.main}>
         <Main />
       </Route>
+      <AuthorizedRoute>
+        <AddStory />
+      </AuthorizedRoute>
       <Route path="*">
         <Redirect to={routes.login} />
       </Route>

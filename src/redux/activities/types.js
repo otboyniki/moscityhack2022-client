@@ -1,0 +1,4 @@
+export const GET_ACTIVITIES = 'activities/GET_ACTIVITIES';
+export const GET_ACTIVITIES_REQUEST = 'activities/GET_ACTIVITIES_REQUEST';
+export const GET_ACTIVITIES_SUCCESS = 'activities/GET_ACTIVITIES_SUCCESS';
+export const GET_ACTIVITIES_FAIL = 'activities/GET_ACTIVITIES_FAIL';

@@ -4,4 +4,5 @@ export default {
   quickRegistration: '/quick-registration',
   registrationConfirm: '/registration-confirm',
   main: '/',
+  addStory: '/add-story',
 };

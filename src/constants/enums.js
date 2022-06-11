@@ -7,3 +7,8 @@ export const UserRoles = {
   Volunteer: 'volunteer',
   Organizer: 'organizer',
 };
+
+export const StoryTypes = {
+  Text: 'text',
+  Video: 'video',
+};
