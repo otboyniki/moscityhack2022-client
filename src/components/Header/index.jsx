@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Link } from '@mui/material';
+import { Link, Button } from '@mui/material';
 
 import routes from '@/constants/routes';
 
@@ -11,12 +11,22 @@ const Header = () => (
     <Link component={NavLink} to={routes.registration}>
       Регистрация
     </Link>
-    <Link component={NavLink} to={routes.login}>
-      Авторизация
-    </Link>
-    <Link component={NavLink} to={routes.main}>
-      Главная
-    </Link>
+    <div>
+      <Button
+        component={NavLink}
+        to={routes.registration}
+        variant="contained"
+      >
+        Регистрация
+      </Button>
+      <Button
+        component={NavLink}
+        to={routes.login}
+        variant="contained"
+      >
+        Вход
+      </Button>
+    </div>
   </S.Container>
 );
 
