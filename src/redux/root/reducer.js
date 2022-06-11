@@ -5,6 +5,7 @@ import auth from '@/redux/auth/reducer';
 import notifications from '@/redux/notifications/reducer';
 import story from '@/redux/story/reducer';
 import activities from '@/redux/activities/reducer';
+import user from '@/redux/user/reducer';
 
 const reducer = combineReducers({
   base,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   notifications,
   story,
   activities,
+  user,
 });
 
 export default reducer;

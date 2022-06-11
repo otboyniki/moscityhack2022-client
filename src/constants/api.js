@@ -6,4 +6,5 @@ export default {
   registrationConfirm: '/fast-registration/confirm',
   activities: '/activities',
   stories: '/stories',
+  userProfile: '/user/profile',
 };

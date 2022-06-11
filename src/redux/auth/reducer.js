@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-
 import { UserRoles } from '@/constants/enums';
 
 import * as Types from './types';
@@ -15,7 +13,7 @@ const initialState = {
     companyName: '',
   },
   isLoading: false,
-  isAuthorized: Cookies.get('AspNetCore.Identity.Application') || true,
+  isAuthorized: localStorage.getItem('isAuthorized'),
   errors: null,
 };
 

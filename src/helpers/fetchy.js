@@ -20,6 +20,8 @@ const fetchy = async (url, body, options) => {
   });
 
   if (response.status === 401) {
+    localStorage.removeItem('isAuthorized');
+
     window.location.href = routes.login;
 
     return undefined;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 
 import {
   Router,
@@ -12,6 +12,9 @@ import {
 import { CssBaseline } from '@mui/material';
 
 import store from '@/redux/store';
+import { getAuthBranch } from '@/redux/auth/selectors';
+import { getUserProfile } from '@/redux/user/actions';
+import { getUserBranch } from '@/redux/user/selectors';
 
 import Main from '@/pages/Main';
 import Registration from '@/pages/Registration';
@@ -24,40 +27,61 @@ import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
 
+import AppLoader from '@/ui/AppLoader';
+
 import history from '@/helpers/history';
 
 import routes from '@/constants/routes';
 
-const App = () => (
-  <Router history={history}>
-    <CssBaseline />
-    <Notifications />
+const App = () => {
+  const { isAuthorized } = useSelector(getAuthBranch);
+  const { phone, email } = useSelector(getUserBranch);
 
-    <Switch>
-      <Route exact path={routes.login}>
-        <Login />
-      </Route>
-      <NonAuthorizedRoute exact path={routes.registration}>
-        <Registration />
-      </NonAuthorizedRoute>
-      <NonAuthorizedRoute exact path={routes.quickRegistration}>
-        <QuickRegistration />
-      </NonAuthorizedRoute>
-      <Route exact path={routes.registrationConfirm}>
-        <RegistrationConfirm />
-      </Route>
-      <Route exact path={routes.main}>
-        <Main />
-      </Route>
-      <AuthorizedRoute>
-        <AddStory />
-      </AuthorizedRoute>
-      <Route path="*">
-        <Redirect to={routes.login} />
-      </Route>
-    </Switch>
-  </Router>
-);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuthorized && !phone && !email) {
+      dispatch(getUserProfile());
+    }
+  }, []);
+
+  if (isAuthorized && !phone && !email) {
+    return (
+      <AppLoader />
+    );
+  }
+
+  return (
+    <Router history={history}>
+      <CssBaseline />
+      <Notifications />
+
+      <Switch>
+        <NonAuthorizedRoute exact path={routes.login}>
+          <Login />
+        </NonAuthorizedRoute>
+        <NonAuthorizedRoute exact path={routes.registration}>
+          <Registration />
+        </NonAuthorizedRoute>
+        <NonAuthorizedRoute exact path={routes.quickRegistration}>
+          <QuickRegistration />
+        </NonAuthorizedRoute>
+        <NonAuthorizedRoute exact path={routes.registrationConfirm}>
+          <RegistrationConfirm />
+        </NonAuthorizedRoute>
+        <Route exact path={routes.main}>
+          <Main />
+        </Route>
+        <AuthorizedRoute>
+          <AddStory />
+        </AuthorizedRoute>
+        <Route path="*">
+          <Redirect to={routes.login} />
+        </Route>
+      </Switch>
+    </Router>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
