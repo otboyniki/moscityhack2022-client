@@ -24,7 +24,8 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "default-param-last": [0]
   },
   "settings": {
     "import/resolver": {
