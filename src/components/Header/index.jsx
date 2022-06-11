@@ -4,8 +4,10 @@ import { Link } from '@mui/material';
 
 import routes from '@/constants/routes';
 
+import S from './styles';
+
 const Header = () => (
-  <div>
+  <S.Container>
     <Link component={NavLink} to={routes.registration}>
       Регистрация
     </Link>
@@ -15,7 +17,7 @@ const Header = () => (
     <Link component={NavLink} to={routes.main}>
       Главная
     </Link>
-  </div>
+  </S.Container>
 );
 
 export default Header;
