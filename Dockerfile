@@ -1,7 +1,7 @@
 FROM nginx:1.19.2 AS base
 WORKDIR /usr/share/nginx/html
 
-FROM node:14.11.0 AS build
+FROM node:14.17.6 AS build
 WORKDIR /usr/src/app
 COPY . .
 RUN npm i
