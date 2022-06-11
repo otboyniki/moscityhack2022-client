@@ -1,9 +1,11 @@
 import React from 'react';
 
+import PageLayout from '@/components/PageLayout';
+
 const Main = () => (
-  <div>
+  <PageLayout>
     <h1>Main</h1>
-  </div>
+  </PageLayout>
 );
 
 export default Main;
