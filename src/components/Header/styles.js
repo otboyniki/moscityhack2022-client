@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   position: relative;
-
-  align-items: center;
-  justify-content: space-between;
-
+  
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 40px;
 
   margin: 0 auto;
   padding: 30px 30px;
