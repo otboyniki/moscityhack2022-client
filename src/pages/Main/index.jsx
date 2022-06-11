@@ -1,11 +1,18 @@
 import React from 'react';
 
-import PageLayout from '@/components/PageLayout';
+import PageLayout from '@/ui/PageLayout';
+import Container from '@/ui/Container';
+import Header from '@/components/Header';
 
 const Main = () => (
-  <PageLayout>
-    <h1>Main</h1>
-  </PageLayout>
+  <>
+    <Header />
+    <PageLayout>
+      <Container>
+        <h1>Main</h1>
+      </Container>
+    </PageLayout>
+  </>
 );
 
 export default Main;

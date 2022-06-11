@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Box,
-  Container,
   FormControl,
   Grid,
   InputLabel,
@@ -26,7 +25,10 @@ import {
 
 import { getAuthBranch, selectAuthData } from '@/redux/auth/selectors';
 
-import PageLayout from '@/components/PageLayout';
+import Header from '@/components/Header';
+
+import PageLayout from '@/ui/PageLayout';
+import Container from '@/ui/Container';
 
 import routes from '@/constants/routes';
 import { UserRoles } from '@/constants/enums';
@@ -70,16 +72,10 @@ const Registration = () => {
   } = errors || {};
 
   return (
-    <PageLayout>
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+    <>
+      <Header />
+      <PageLayout>
+        <Container>
           <Typography component="h1" variant="h5">
             Регистрация
           </Typography>
@@ -144,18 +140,18 @@ const Registration = () => {
                 </FormControl>
               </Grid>
               {type === UserRoles.Organizer && (
-                <Grid item xs={12}>
-                  <TextField
-                    name="companyName"
-                    label="Название организации"
-                    value={companyName}
-                    onChange={handleChange}
-                    error={Boolean(companyNameError)}
-                    helperText={companyNameError}
-                    fullWidth
-                    required
-                  />
-                </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="companyName"
+                  label="Название организации"
+                  value={companyName}
+                  onChange={handleChange}
+                  error={Boolean(companyNameError)}
+                  helperText={companyNameError}
+                  fullWidth
+                  required
+                />
+              </Grid>
               )}
             </Grid>
             <LoadingButton
@@ -180,10 +176,9 @@ const Registration = () => {
               </Grid>
             </Grid>
           </Box>
-        </Box>
-
-      </Container>
-    </PageLayout>
+        </Container>
+      </PageLayout>
+    </>
   );
 };
 

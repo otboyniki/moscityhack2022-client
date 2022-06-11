@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Box,
-  Container,
   Grid,
   Link,
   TextField,
@@ -25,9 +24,11 @@ import {
   selectAuthData,
 } from '@/redux/auth/selectors';
 
-import PageLayout from '@/components/PageLayout';
+import PageLayout from '@/ui/PageLayout';
 
 import routes from '@/constants/routes';
+import Container from '@/ui/Container';
+import Header from '@/components/Header';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -59,16 +60,10 @@ const Login = () => {
   } = errors || {};
 
   return (
-    <PageLayout>
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+    <>
+      <Header />
+      <PageLayout>
+        <Container>
           <Typography component="h1" variant="h5">
             Вход
           </Typography>
@@ -114,9 +109,9 @@ const Login = () => {
               </Grid>
             </Grid>
           </Box>
-        </Box>
-      </Container>
-    </PageLayout>
+        </Container>
+      </PageLayout>
+    </>
   );
 };
 

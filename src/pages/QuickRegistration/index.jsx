@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Box,
-  Container,
   Grid,
   TextField,
   Typography,
@@ -23,7 +22,10 @@ import {
   quickRegister,
 } from '@/redux/auth/actions';
 
-import PageLayout from '@/components/PageLayout';
+import Header from '@/components/Header';
+
+import PageLayout from '@/ui/PageLayout';
+import Container from '@/ui/Container';
 
 const QuickRegistration = () => {
   const dispatch = useDispatch();
@@ -59,16 +61,10 @@ const QuickRegistration = () => {
   } = errors || {};
 
   return (
-    <PageLayout>
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+    <>
+      <Header />
+      <PageLayout>
+        <Container>
           <Typography component="h1" variant="h5">
             Быстрая регистрация
           </Typography>
@@ -115,9 +111,10 @@ const QuickRegistration = () => {
               Зарегистрироваться
             </LoadingButton>
           </Box>
-        </Box>
-      </Container>
-    </PageLayout>
+        </Container>
+      </PageLayout>
+
+    </>
   );
 };
 

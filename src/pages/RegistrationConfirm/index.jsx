@@ -5,7 +5,6 @@ import { LoadingButton } from '@mui/lab';
 
 import {
   Box,
-  Container,
   TextField,
   Typography,
 } from '@mui/material';
@@ -22,10 +21,14 @@ import {
   selectAuthData,
 } from '@/redux/auth/selectors';
 
-import PageLayout from '@/components/PageLayout';
+import Header from '@/components/Header';
+
+import PageLayout from '@/ui/PageLayout';
+import Container from '@/ui/Container';
+
+import getQueryParams from '@/helpers/getQueryParams';
 
 import routes from '@/constants/routes';
-import getQueryParams from '@/helpers/getQueryParams';
 
 const RegistrationConfirm = () => {
   const dispatch = useDispatch();
@@ -65,16 +68,10 @@ const RegistrationConfirm = () => {
   } = errors || {};
 
   return (
-    <PageLayout>
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+    <>
+      <Header />
+      <PageLayout>
+        <Container>
           <Typography component="h1" variant="h5">
             Подтвердите регистрацию
           </Typography>
@@ -109,9 +106,9 @@ const RegistrationConfirm = () => {
               Подтвердить
             </LoadingButton>
           </Box>
-        </Box>
-      </Container>
-    </PageLayout>
+        </Container>
+      </PageLayout>
+    </>
   );
 };
 
