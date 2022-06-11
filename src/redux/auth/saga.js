@@ -45,9 +45,12 @@ function* login() {
     }
 
     const body = {
-      communication: isMobilePhone(communication, 'ru-RU')
-        ? QuickRegistrationTypes.Phone
-        : QuickRegistrationTypes.Email,
+      communication: {
+        type: isMobilePhone(communication, 'ru-RU')
+          ? QuickRegistrationTypes.Phone
+          : QuickRegistrationTypes.Email,
+        value: communication,
+      },
     };
 
     const response = yield call(fetchy, urls.login, body);
@@ -58,7 +61,7 @@ function* login() {
 
     yield put(AuthActions.loginSuccess());
 
-    history.push(routes.main);
+    history.push(`${routes.registrationConfirm}?id=${response.id}`);
   } catch (e) {
     console.warn(e);
 
