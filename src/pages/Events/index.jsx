@@ -7,6 +7,7 @@ import { Button, Typography } from '@mui/material';
 import { getEventsBranch } from '@/redux/events/selectors';
 import { clearEvents, getEvents } from '@/redux/events/actions';
 import { getActivities } from '@/redux/activities/actions';
+import { getUserBranch } from '@/redux/user/selectors';
 
 import replaceUrl from '@/helpers/replaceUrl';
 
@@ -18,10 +19,12 @@ import Container from '@/ui/Container';
 import PageLayout from '@/ui/PageLayout';
 import PageLoader from '@/ui/PageLoader';
 
+import routes from '@/constants/routes';
+import { UserRoles } from '@/constants/enums';
+
 import { demapFilter, mapFilter } from './helpers';
 
 import S from './styles';
-import routes from '@/constants/routes';
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -35,6 +38,7 @@ const Events = () => {
   ), [location]);
 
   const { data: events } = useSelector(getEventsBranch);
+  const { profileType } = useSelector(getUserBranch);
 
   useEffect(() => {
     dispatch(getActivities());
@@ -77,13 +81,15 @@ const Events = () => {
                 <Typography component="h1" variant="h5">
                   Список событий
                 </Typography>
-                <Button
-                  component={NavLink}
-                  to={routes.addEvent}
-                  variant="contained"
-                >
-                  Добавить событие
-                </Button>
+                {profileType === UserRoles.Organizer && (
+                  <Button
+                    component={NavLink}
+                    to={routes.addEvent}
+                    variant="contained"
+                  >
+                    Добавить событие
+                  </Button>
+                )}
               </S.Title>
               {!events && (
                 <PageLoader />

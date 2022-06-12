@@ -12,6 +12,18 @@ const Container = styled.div`
 const MediaContainer = styled.div`
   position: relative;
   width: calc(100% - 390px);
+
+  &:after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(180deg, rgba(13,13,13,0) 0%, rgba(13,13,13,0.9) 100%);
+    width: 100%;
+    height: 400px;
+    z-index: 1;
+    pointer-events: none;
+    left: 0;
+    bottom: 0;
+  }
 `;
 
 const FullsizeMedia = styled.div`
