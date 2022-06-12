@@ -113,7 +113,7 @@ const Login = () => {
                   Зарегистрироваться
                 </Button>
                 <S.RegSubtitle>
-                  Регистрируйся быстрее!
+                  Регистрируйтесь быстрее!
                 </S.RegSubtitle>
               </div>
             </S.RegistrationWrapper>
