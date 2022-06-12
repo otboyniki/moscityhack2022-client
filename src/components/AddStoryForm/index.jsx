@@ -24,6 +24,7 @@ import { getActivitiesBranch } from '@/redux/activities/selectors';
 import useUpload from '@/hooks/useUpload';
 
 import { StoryTypes } from '@/constants/enums';
+import { BASE_URL } from '@/constants/env';
 
 import Editor from './Editor';
 
@@ -183,7 +184,7 @@ const AddStoryForm = () => {
           {lastUploadedFile && (
             <S.Video>
               <video
-                src={`/api/files/${lastUploadedFile}`}
+                src={`${BASE_URL}/files/${lastUploadedFile}`}
                 controls
               />
             </S.Video>
