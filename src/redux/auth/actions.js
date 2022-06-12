@@ -82,6 +82,22 @@ export const clearValidation = () => ({
   type: Types.CLEAR_VALIDATION,
 });
 
+export const logout = () => ({
+  type: Types.LOGOUT,
+});
+
+export const logoutRequest = () => ({
+  type: Types.LOGOUT_REQUEST,
+});
+
+export const logoutSuccess = () => ({
+  type: Types.LOGOUT_SUCCESS,
+});
+
+export const logoutFail = () => ({
+  type: Types.LOGOUT_FAIL,
+});
+
 export const clearAuth = () => ({
   type: Types.CLEAR_AUTH,
 });

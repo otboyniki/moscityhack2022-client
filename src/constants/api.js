@@ -9,4 +9,5 @@ export default {
   userProfile: '/user/profile',
   events: '/events',
   mainEventsReviews: '/main/events-reviews',
+  logout: '/sign-out',
 };

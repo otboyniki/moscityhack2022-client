@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { useLocation, NavLink } from 'react-router-dom';
+import { Button, Typography } from '@mui/material';
 
 import { getEventsBranch } from '@/redux/events/selectors';
 import { clearEvents, getEvents } from '@/redux/events/actions';
@@ -21,6 +21,7 @@ import PageLoader from '@/ui/PageLoader';
 import { demapFilter, mapFilter } from './helpers';
 
 import S from './styles';
+import routes from '@/constants/routes';
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -72,9 +73,18 @@ const Events = () => {
               />
             </S.Filter>
             <S.List>
-              <Typography component="h1" variant="h5">
-                Список событий
-              </Typography>
+              <S.Title>
+                <Typography component="h1" variant="h5">
+                  Список событий
+                </Typography>
+                <Button
+                  component={NavLink}
+                  to={routes.addEvent}
+                  variant="contained"
+                >
+                  Добавить событие
+                </Button>
+              </S.Title>
               {!events && (
                 <PageLoader />
               )}

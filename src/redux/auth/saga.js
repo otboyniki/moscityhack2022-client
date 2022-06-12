@@ -241,11 +241,26 @@ function* confirmRegistration() {
   }
 }
 
+function* logout() {
+  try {
+    yield put(AuthActions.logoutRequest());
+
+    yield call(fetchy, urls.logout, {});
+
+    localStorage.removeItem('isAuthorized');
+
+    window.location.href = routes.main;
+  } catch (e) {
+    yield put(AuthActions.logoutFail());
+  }
+}
+
 function* authSaga() {
   yield takeLatest(AuthTypes.LOGIN, login);
   yield takeLatest(AuthTypes.REGISTER, register);
   yield takeLatest(AuthTypes.QUICK_REGISTER, quickRegister);
   yield takeLatest(AuthTypes.CONFIRM_REGISTRATION, confirmRegistration);
+  yield takeLatest(AuthTypes.LOGOUT, logout);
 }
 
 export default authSaga;

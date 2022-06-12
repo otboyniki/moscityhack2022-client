@@ -32,7 +32,8 @@ const reducer = (state = initialState, { type, payload } = {}) => {
     case Types.LOGIN_REQUEST:
     case Types.REGISTER_REQUEST:
     case Types.QUICK_REGISTER_REQUEST:
-    case Types.CONFIRM_REGISTRATION_REQUEST: {
+    case Types.CONFIRM_REGISTRATION_REQUEST:
+    case Types.LOGOUT_REQUEST: {
       return {
         ...state,
         isLoading: true,
@@ -53,7 +54,8 @@ const reducer = (state = initialState, { type, payload } = {}) => {
     case Types.REGISTER_FAIL:
     case Types.QUICK_REGISTER_SUCCESS:
     case Types.QUICK_REGISTER_FAIL:
-    case Types.CONFIRM_REGISTRATION_FAIL: {
+    case Types.CONFIRM_REGISTRATION_FAIL:
+    case Types.LOGOUT_FAIL: {
       return {
         ...state,
         isLoading: false,

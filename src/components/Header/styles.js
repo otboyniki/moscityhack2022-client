@@ -1,3 +1,4 @@
+import { Link } from '@mui/material';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -15,6 +16,32 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const Links = styled.div`
+  display: flex;
+
+  justify-content: space-between;
+`;
+
+const Buttons = styled.div`
+  align-items: center;
+
+  display: flex;
+`;
+
+const CustomLink = styled(Link)`
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+`;
+
+const Name = styled.div`
+  margin-right: 12px;
+`;
+
 export default {
   Container,
+  Links,
+  CustomLink,
+  Buttons,
+  Name,
 };

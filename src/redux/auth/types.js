@@ -23,4 +23,9 @@ export const CONFIRM_REGISTRATION_FAIL = 'auth/CONFIRM_REGISTRATION_FAIL';
 export const SET_VALIDATION = 'auth/SET_VALIDATION';
 export const CLEAR_VALIDATION = 'auth/CLEAR_VALIDATION';
 
+export const LOGOUT = 'auth/LOGOUT';
+export const LOGOUT_REQUEST = 'auth/LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
+export const LOGOUT_FAIL = 'auth/LOGOUT_FAIL';
+
 export const CLEAR_AUTH = 'auth/CLEAR_AUTH';

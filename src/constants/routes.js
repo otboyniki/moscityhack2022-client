@@ -8,4 +8,6 @@ export default {
   events: '/events',
   event: '/events/:id',
   addReview: '/add-review',
+  stories: '/stories',
+  addEvent: '/add-event',
 };
