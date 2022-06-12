@@ -5,6 +5,8 @@ import useUpload from '@/hooks/useUpload';
 
 import Editor from '@/ui/Editor';
 
+import { BASE_URL } from '@/constants/env';
+
 const StoryEditor = (props) => {
   const {
     editorState,
@@ -32,7 +34,7 @@ const StoryEditor = (props) => {
 
   useEffect(() => {
     if (lastUploadedFile) {
-      onChange(insertImage(`/api/files/${lastUploadedFile}`));
+      onChange(insertImage(`${BASE_URL}/files/${lastUploadedFile}`));
     }
   }, [lastUploadedFile]);
 
