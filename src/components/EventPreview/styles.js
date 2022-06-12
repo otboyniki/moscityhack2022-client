@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const PreviewCard = styled.div`
-  width: 330px;
+  width: 100%;
   background-color: #eff0f3;
   border-radius: 0 0 8px 8px;
   box-sizing: border-box;

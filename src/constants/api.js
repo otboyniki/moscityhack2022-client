@@ -7,4 +7,5 @@ export default {
   activities: '/activities',
   stories: '/stories',
   userProfile: '/user/profile',
+  events: '/events',
 };

@@ -12,3 +12,8 @@ export const StoryTypes = {
   Text: 'text',
   Video: 'video',
 };
+
+export const EventFormats = {
+  Online: 'online',
+  Offline: 'offline',
+};

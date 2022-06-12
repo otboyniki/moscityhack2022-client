@@ -6,6 +6,8 @@ import Header from '@/components/Header';
 import EventPreview from '@/components/EventPreview';
 import StoryMainList from '@/components/StoryMainList';
 
+import { EVENTS } from './constants';
+
 import S from './styles';
 
 const Main = () => (
@@ -15,10 +17,18 @@ const Main = () => (
       <Container>
         <h1>Main</h1>
         <S.EventsSection>
-          <EventPreview />
-          <EventPreview />
-          <EventPreview />
-          <EventPreview />
+          {EVENTS.map(({
+            id, title, locations, meeting,
+          }) => (
+            <S.Event>
+              <EventPreview
+                key={id}
+                title={title}
+                locations={locations}
+                meeting={meeting}
+              />
+            </S.Event>
+          ))}
         </S.EventsSection>
       </Container>
 

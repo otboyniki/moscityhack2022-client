@@ -6,6 +6,7 @@ import notifications from '@/redux/notifications/reducer';
 import story from '@/redux/story/reducer';
 import activities from '@/redux/activities/reducer';
 import user from '@/redux/user/reducer';
+import events from '@/redux/events/reducer';
 
 const reducer = combineReducers({
   base,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   story,
   activities,
   user,
+  events,
 });
 
 export default reducer;

@@ -22,6 +22,7 @@ import Login from '@/pages/Login';
 import QuickRegistration from '@/pages/QuickRegistration';
 import RegistrationConfirm from '@/pages/RegistrationConfirm';
 import AddStory from '@/pages/AddStory';
+import Events from '@/pages/Events';
 
 import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
@@ -69,6 +70,9 @@ const App = () => {
         <NonAuthorizedRoute exact path={routes.registrationConfirm}>
           <RegistrationConfirm />
         </NonAuthorizedRoute>
+        <Route exact path={routes.events}>
+          <Events />
+        </Route>
         <Route exact path={routes.main}>
           <Main />
         </Route>

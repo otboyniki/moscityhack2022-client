@@ -4,6 +4,7 @@ import notifications from '@/redux/notifications/saga';
 import story from '@/redux/story/saga';
 import activities from '@/redux/activities/saga';
 import user from '@/redux/user/saga';
+import events from '@/redux/events/saga';
 
 const sagas = [
   base,
@@ -12,6 +13,7 @@ const sagas = [
   activities,
   story,
   user,
+  events,
 ];
 
 export default sagas;

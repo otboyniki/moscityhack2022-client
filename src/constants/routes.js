@@ -5,4 +5,5 @@ export default {
   registrationConfirm: '/registration-confirm',
   main: '/',
   addStory: '/add-story',
+  events: '/events',
 };
