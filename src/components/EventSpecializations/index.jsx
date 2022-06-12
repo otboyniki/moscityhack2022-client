@@ -91,15 +91,22 @@ const EventSpecializations = () => {
                   <Typography variant="subtitle2">
                     Возрастные ограничения
                   </Typography>
-                  <Typography variant="body2">
-                    от
-                    {' '}
-                    {ages.from}
-                    {' '}
-                    до
-                    {' '}
-                    {ages.to}
-                  </Typography>
+                  {ages && (
+                    <Typography variant="body2">
+                      от
+                      {' '}
+                      {ages.from}
+                      {' '}
+                      до
+                      {' '}
+                      {ages.to}
+                    </Typography>
+                  )}
+                  {!ages && (
+                    <Typography>
+                      Любой
+                    </Typography>
+                  )}
                 </S.Block>
                 <S.Block>
                   <Typography variant="subtitle2">
