@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 import store from '@/redux/store';
-import { getAuthBranch } from '@/redux/auth/selectors';
 import { getUserProfile } from '@/redux/user/actions';
 import { getUserBranch } from '@/redux/user/selectors';
 
@@ -24,6 +23,7 @@ import QuickRegistration from '@/pages/QuickRegistration';
 import RegistrationConfirm from '@/pages/RegistrationConfirm';
 import AddStory from '@/pages/AddStory';
 import Events from '@/pages/Events';
+import Event from '@/pages/Event';
 
 import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
@@ -59,18 +59,17 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const { isAuthorized } = useSelector(getAuthBranch);
-  const { phone, email } = useSelector(getUserBranch);
+  const { isLoading, phone, email } = useSelector(getUserBranch);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuthorized && !phone && !email) {
+    if (!phone && !email) {
       dispatch(getUserProfile());
     }
   }, []);
 
-  if (isAuthorized && !phone && !email) {
+  if (isLoading && !phone && !email) {
     return (
       <AppLoader />
     );
@@ -101,7 +100,10 @@ const App = () => {
           <Route exact path={routes.events}>
             <Events />
           </Route>
-          <AuthorizedRoute>
+          <Route path={routes.event}>
+            <Event />
+          </Route>
+          <AuthorizedRoute exact path={routes.addStory}>
             <AddStory />
           </AuthorizedRoute>
           <Route path="*">

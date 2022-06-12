@@ -6,4 +6,5 @@ export default {
   main: '/',
   addStory: '/add-story',
   events: '/events',
+  event: '/events/:id',
 };

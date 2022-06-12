@@ -23,13 +23,19 @@ const fetchy = async (url, body, options) => {
   if (response.status === 401) {
     localStorage.removeItem('isAuthorized');
 
-    window.location.href = routes.login;
+    if (!options.without401check) {
+      window.location.href = routes.login;
+    }
 
     return undefined;
   }
 
   if (!response.ok) {
     throw response;
+  }
+
+  if (response.headers.get('content-length') === '0') {
+    return {};
   }
 
   const data = await response.json();
