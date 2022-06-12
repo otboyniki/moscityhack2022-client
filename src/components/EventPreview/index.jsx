@@ -21,7 +21,7 @@ const EventPreview = (props) => {
 
   return (
     <S.PreviewCard>
-      <Link component={NavLink} to={`/events/${id}`} underline="none">
+      <S.CustomLink component={NavLink} to={`/events/${id}`} underline="none">
         <S.Image src={`${BASE_URL}/files/${previewId}`} />
         <S.Text>
           <S.Title>
@@ -40,7 +40,7 @@ const EventPreview = (props) => {
             {formatDate(meeting.until)}
           </S.Description>
         </S.Text>
-      </Link>
+      </S.CustomLink>
     </S.PreviewCard>
   );
 };
