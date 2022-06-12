@@ -4,14 +4,12 @@ import DraftEditor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import 'draft-js/dist/Draft.css';
 
-import {
-  AddPhotoAlternate,
-  FormatBold,
-  FormatItalic,
-  FormatListBulleted,
-  FormatListNumbered,
-  FormatUnderlined,
-} from '@mui/icons-material';
+import AddPhotoAlternate from '@mui/icons-material/AddPhotoAlternate';
+import FormatBold from '@mui/icons-material/FormatBold';
+import FormatItalic from '@mui/icons-material/FormatItalic';
+import FormatListBulleted from '@mui/icons-material/FormatListBulleted';
+import FormatListNumbered from '@mui/icons-material/FormatListNumbered';
+import FormatUnderlined from '@mui/icons-material/FormatUnderlined';
 
 import { Input } from '@mui/material';
 
