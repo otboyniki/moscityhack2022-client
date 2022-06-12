@@ -7,6 +7,8 @@ const initialState = {
   description: '',
   previewId: '',
   activityIds: [],
+  shortDescription: '',
+  title: '',
 };
 
 const reducer = (state = initialState, { type, payload } = {}) => {
@@ -15,6 +17,16 @@ const reducer = (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         ...payload,
+      };
+    }
+
+    case types.SET_VALIDATION: {
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          ...payload,
+        },
       };
     }
 

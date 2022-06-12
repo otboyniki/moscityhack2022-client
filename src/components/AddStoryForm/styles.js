@@ -1,18 +1,6 @@
 import styled from 'styled-components';
 
-const Type = styled.div`
-  margin-bottom: 24px;
-`;
-
-const Editor = styled.div`
-  margin-bottom: 24px;
-`;
-
-const Activities = styled.div`
-  margin-bottom: 24px;
-`;
-
-const VideoInput = styled.div`
+const Block = styled.div`
   margin-bottom: 24px;
 `;
 
@@ -21,9 +9,6 @@ const Video = styled.div`
 `;
 
 export default {
-  Type,
-  Editor,
-  Activities,
-  VideoInput,
+  Block,
   Video,
 };

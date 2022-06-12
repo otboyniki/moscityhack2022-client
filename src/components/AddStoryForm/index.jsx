@@ -13,6 +13,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
   Typography,
 } from '@mui/material';
 
@@ -37,6 +38,9 @@ const AddStoryForm = () => {
     isLoading,
     format,
     activityIds,
+    shortDescription,
+    errors,
+    title,
   } = useSelector(getStoryBranch);
 
   const { items: activities } = useSelector(getActivitiesBranch);
@@ -84,9 +88,25 @@ const AddStoryForm = () => {
     }));
   };
 
+  const {
+    shortDescription: [shortDescriptionError] = [null],
+    title: [titleError] = [null],
+  } = errors || {};
+
   return (
     <form onSubmit={handleSubmit}>
-      <S.Type>
+      <S.Block>
+        <TextField
+          name="title"
+          label="Название истории"
+          value={title}
+          onChange={handleChange}
+          error={Boolean(titleError)}
+          helperText={titleError}
+          fullWidth
+        />
+      </S.Block>
+      <S.Block>
         <FormControl fullWidth>
           <InputLabel id="format">
             Тип истории
@@ -102,8 +122,8 @@ const AddStoryForm = () => {
             <MenuItem value={StoryTypes.Video}>Видео</MenuItem>
           </Select>
         </FormControl>
-      </S.Type>
-      <S.Activities>
+      </S.Block>
+      <S.Block>
         <Typography>
           К чему относится ваша история?
         </Typography>
@@ -122,18 +142,31 @@ const AddStoryForm = () => {
             label={title}
           />
         ))}
-      </S.Activities>
+      </S.Block>
       {format === StoryTypes.Text && (
-        <S.Editor>
+        <S.Block>
+          <TextField
+            name="shortDescription"
+            label="Короткое описание"
+            value={shortDescription}
+            onChange={handleChange}
+            error={Boolean(shortDescriptionError)}
+            helperText={shortDescriptionError}
+            fullWidth
+          />
+        </S.Block>
+      )}
+      {format === StoryTypes.Text && (
+        <S.Block>
           <Editor
             editorState={editorState}
             onChange={setEditorState}
           />
-        </S.Editor>
+        </S.Block>
       )}
       {format === StoryTypes.Video && (
         <>
-          <S.VideoInput>
+          <S.Block>
             <Button
               variant="contained"
               component="label"
@@ -146,7 +179,7 @@ const AddStoryForm = () => {
                 hidden
               />
             </Button>
-          </S.VideoInput>
+          </S.Block>
           {lastUploadedFile && (
             <S.Video>
               <video

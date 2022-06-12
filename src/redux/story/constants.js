@@ -28,4 +28,16 @@ export const VALIDATORS = {
   activityIds: (value = []) => [
     value.length === 0 && 'Укажите к чему относится история',
   ],
+  shortDescription: (value = '', deps) => {
+    if (deps.format === StoryTypes.Video) {
+      return [];
+    }
+
+    return [
+      isEmpty(value) && 'Укажите короткое описание',
+    ];
+  },
+  title: (value = '') => [
+    isEmpty(value) && 'Укажите название истории',
+  ],
 };

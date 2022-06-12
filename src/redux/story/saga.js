@@ -28,6 +28,8 @@ function* addStory({ payload }) {
       previewId,
       format,
       activityIds,
+      title,
+      shortDescription,
     } = yield select(getStoryBranch);
 
     const { hasErrors, errors } = validate(VALIDATORS)({
@@ -35,6 +37,8 @@ function* addStory({ payload }) {
       previewId,
       format,
       activityIds,
+      title,
+      shortDescription,
     });
 
     if (hasErrors) {
@@ -45,21 +49,19 @@ function* addStory({ payload }) {
     }
 
     const body = {
+      title,
       format,
       activityIds,
     };
 
     if (format === StoryTypes.Text) {
       body.description = payload.description;
+      body.shortDescription = shortDescription;
     } else {
       body.previewId = previewId;
     }
 
-    const response = yield call(fetchy, urls.stories, body);
-
-    if (!response) {
-      throw response;
-    }
+    yield call(fetchy, urls.stories, body);
 
     yield put(Actions.addStorySuccess());
 
