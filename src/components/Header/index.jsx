@@ -1,11 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Link } from '@mui/material';
+import { Link, Button } from '@mui/material';
 
 import routes from '@/constants/routes';
 
 import S from './styles';
-import CustomButton from '@/ui/CustomButton';
 
 const Header = () => (
   <S.Container>
@@ -13,21 +12,21 @@ const Header = () => (
       Лого
     </Link>
     <div>
-      <CustomButton
+      <Button
         component={NavLink}
         to={routes.registration}
         variant="contained"
         color="secondary"
       >
         Регистрация
-      </CustomButton>
-      <CustomButton
+      </Button>
+      <Button
         component={NavLink}
         to={routes.login}
         variant="contained"
       >
         Вход
-      </CustomButton>
+      </Button>
     </div>
   </S.Container>
 );

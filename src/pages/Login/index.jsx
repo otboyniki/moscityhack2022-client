@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-import {
-  Box,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
-
+import { TextField, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {
   clearAuth,
@@ -27,8 +20,8 @@ import {
 import PageLayout from '@/ui/PageLayout';
 
 import routes from '@/constants/routes';
-import Container from '@/ui/Container';
-import Header from '@/components/Header';
+
+import S from './styles';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -60,58 +53,74 @@ const Login = () => {
   } = errors || {};
 
   return (
-    <>
-      <Header />
+    <S.DarkBackground>
       <PageLayout>
-        <Container>
-          <Typography component="h1" variant="h5">
-            Вход
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 3 }}
+        <S.FormContainer>
+          <Button
+            component={NavLink}
+            to={routes.main}
+            variant="outlined"
+            startIcon={<ArrowBackIcon />}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="communication"
-                  label="Почта/телефон"
-                  value={communication}
-                  onChange={handleChange}
-                  error={Boolean(communicationError)}
-                  helperText={communicationError}
-                  fullWidth
-                  required
-                />
-              </Grid>
-            </Grid>
-            <LoadingButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              loading={isLoading}
-              disabled={isLoading}
-            >
-              Войти
-            </LoadingButton>
-            <Grid container>
-              <Grid item>
-                <Link
+            Вернуться на главную
+          </Button>
+          <S.FullWrapper>
+            <S.LoginWrapper>
+              <div>
+                <S.Title>
+                  Вход
+                </S.Title>
+                <S.FormBox
+                  component="form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                >
+                  <TextField
+                    name="communication"
+                    label="Почта/телефон"
+                    value={communication}
+                    onChange={handleChange}
+                    error={Boolean(communicationError)}
+                    helperText={communicationError}
+                    fullWidth
+                    required
+                  />
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    loading={isLoading}
+                    disabled={isLoading}
+                    color="error"
+                  >
+                    Войти
+                  </LoadingButton>
+                </S.FormBox>
+              </div>
+            </S.LoginWrapper>
+            <S.RegistrationWrapper>
+              <div>
+                <S.RegTitle>
+                  Еще не с нами?
+                </S.RegTitle>
+                <Button
                   component={NavLink}
                   to={routes.registration}
-                  variant="body2"
+                  variant="outlined"
+                  color="secondary"
+                  size="large"
+                  fullWidth
                 >
-                  Нет аккаунта? Зарегистрируйтесь
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Container>
+                  Зарегистрироваться
+                </Button>
+                <S.RegSubtitle>
+                  Регистрируйтесь быстрее!
+                </S.RegSubtitle>
+              </div>
+            </S.RegistrationWrapper>
+          </S.FullWrapper>
+        </S.FormContainer>
       </PageLayout>
-    </>
+    </S.DarkBackground>
   );
 };
 
