@@ -4,7 +4,7 @@ WORKDIR /usr/share/nginx/html
 FROM node:17.3.0 AS build
 WORKDIR /usr/src/app
 COPY . .
-RUN npm i
+RUN npm i --force
 RUN npm run build
 RUN cp -r dist /build
 RUN cp nginx.conf /build
