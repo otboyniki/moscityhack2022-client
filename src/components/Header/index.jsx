@@ -1,31 +1,33 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Link, Button } from '@mui/material';
+import { Link } from '@mui/material';
 
 import routes from '@/constants/routes';
 
 import S from './styles';
+import CustomButton from '@/ui/CustomButton';
 
 const Header = () => (
   <S.Container>
-    <Link component={NavLink} to={routes.registration}>
-      Регистрация
+    <Link component={NavLink} to={routes.main}>
+      Лого
     </Link>
     <div>
-      <Button
+      <CustomButton
         component={NavLink}
         to={routes.registration}
         variant="contained"
+        color="secondary"
       >
         Регистрация
-      </Button>
-      <Button
+      </CustomButton>
+      <CustomButton
         component={NavLink}
         to={routes.login}
         variant="contained"
       >
         Вход
-      </Button>
+      </CustomButton>
     </div>
   </S.Container>
 );
