@@ -1,21 +1,6 @@
 import styled from 'styled-components';
 import { Box } from '@mui/material';
 
-const FormContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  transform: translateY(50%);
-`;
-
-const FullWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  margin-top: 20px;;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: rgba(0,0,0,0.2) 0px 2px 1px -1px,rgba(0,0,0,0.14) 0px 1px 1px 0px,rgba(0,0,0,0.12) 0px 1px 3px 0px;
-`;
-
 const WrapperHalf = styled.div`
   display: flex;
   justify-content: center;
@@ -27,6 +12,7 @@ const WrapperHalf = styled.div`
 
 const LoginWrapper = styled(WrapperHalf)`
   background-color: #fffffe;
+  color: #0d0d0d;
 `;
 
 const RegistrationWrapper = styled(WrapperHalf)`
@@ -35,14 +21,6 @@ const RegistrationWrapper = styled(WrapperHalf)`
 `;
 
 const Title = styled.h1`
-  margin-top: 0px;
-  text-align: center;
-  color: #0d0d0d;
-  font-weight: 800;
-  font-family: 'Montserrat', sans-serif;
-`;
-
-const RegTitle = styled.h1`
   margin-top: 0px;
   text-align: center;
   font-weight: 800;
@@ -64,12 +42,9 @@ const FormBox = styled(Box)`
 `;
 
 export default {
-  FormContainer,
-  FullWrapper,
   LoginWrapper,
   RegistrationWrapper,
   FormBox,
   Title,
-  RegTitle,
   RegSubtitle,
 };

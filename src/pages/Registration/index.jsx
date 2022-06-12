@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {
   Box,
@@ -22,7 +21,7 @@ import {
 
 import { getAuthBranch, selectAuthData } from '@/redux/auth/selectors';
 
-import PageLayout from '@/ui/PageLayout';
+import SignLayout from '@/ui/SignLayout';
 
 import routes from '@/constants/routes';
 import { UserRoles } from '@/constants/enums';
@@ -68,123 +67,111 @@ const Registration = () => {
   } = errors || {};
 
   return (
-    <PageLayout isDark>
-      <S.FormContainer>
-        <Button
-          component={NavLink}
-          to={routes.main}
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-        >
-          Вернуться на главную
-        </Button>
-        <S.FullWrapper>
-          <S.LoginWrapper>
+    <SignLayout showBackButton>
+      <S.LoginWrapper>
+        <div>
+          <S.Title>
+            Уже были у нас?
+          </S.Title>
+          <Button
+            component={NavLink}
+            to={routes.login}
+            variant="outlined"
+            color="secondary"
+            size="large"
+            fullWidth
+          >
+            Войти
+          </Button>
+          <S.RegSubtitle>
+            С возвращением!
+          </S.RegSubtitle>
+        </div>
+      </S.LoginWrapper>
+      <S.RegistrationWrapper>
+        <div>
+          <S.Title>
+            Регистрация
+          </S.Title>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <div>
-              <S.RegTitle>
-                Уже были у нас?
-              </S.RegTitle>
-              <Button
-                component={NavLink}
-                to={routes.login}
-                variant="outlined"
-                color="secondary"
-                size="large"
+              <S.TextFieldWrapper
+                name="firstName"
+                label="Имя"
+                value={firstName}
+                onChange={handleChange}
+                error={Boolean(firstNameError)}
+                helperText={firstNameError}
                 fullWidth
-              >
-                Войти
-              </Button>
-              <S.RegSubtitle>
-                С возвращением!
-              </S.RegSubtitle>
+                required
+              />
+              <S.TextFieldWrapper
+                name="lastName"
+                label="Фамилия"
+                value={lastName}
+                onChange={handleChange}
+                error={Boolean(lastNameError)}
+                helperText={lastNameError}
+                fullWidth
+                required
+              />
             </div>
-          </S.LoginWrapper>
-          <S.RegistrationWrapper>
-            <div>
-              <S.RegTitle>
-                Регистрация
-              </S.RegTitle>
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-              >
-                <div>
-                  <S.TextFieldWrapper
-                    name="firstName"
-                    label="Имя"
-                    value={firstName}
-                    onChange={handleChange}
-                    error={Boolean(firstNameError)}
-                    helperText={firstNameError}
-                    fullWidth
-                    required
-                  />
-                  <S.TextFieldWrapper
-                    name="lastName"
-                    label="Фамилия"
-                    value={lastName}
-                    onChange={handleChange}
-                    error={Boolean(lastNameError)}
-                    helperText={lastNameError}
-                    fullWidth
-                    required
-                  />
-                </div>
-                <S.TextFieldWrapper
-                  name="email"
-                  label="Почта"
-                  value={email}
-                  onChange={handleChange}
-                  error={Boolean(emailError)}
-                  helperText={emailError}
-                  fullWidth
-                  required
-                />
+            <S.TextFieldWrapper
+              name="email"
+              label="Почта"
+              value={email}
+              onChange={handleChange}
+              error={Boolean(emailError)}
+              helperText={emailError}
+              fullWidth
+              required
+            />
 
-                <S.FormControlWrapper fullWidth>
-                  <InputLabel id="type">
-                    Роль
-                  </InputLabel>
-                  <Select
-                    labelId="type"
-                    name="type"
-                    label="Роль"
-                    value={type}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={UserRoles.Volunteer}>Волонтер</MenuItem>
-                    <MenuItem value={UserRoles.Organizer}>Организатор</MenuItem>
-                  </Select>
-                </S.FormControlWrapper>
-                {type === UserRoles.Organizer && (
-                  <S.TextFieldWrapper
-                    name="companyName"
-                    label="Название организации"
-                    value={companyName}
-                    onChange={handleChange}
-                    error={Boolean(companyNameError)}
-                    helperText={companyNameError}
-                    fullWidth
-                    required
-                  />
-                )}
-                <LoadingButton
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  loading={isLoading}
-                  disabled={isLoading}
-                >
-                  Зарегистрироваться
-                </LoadingButton>
-              </Box>
-            </div>
-          </S.RegistrationWrapper>
-        </S.FullWrapper>
-      </S.FormContainer>
-    </PageLayout>
+            <S.FormControlWrapper fullWidth>
+              <InputLabel id="type">
+                Роль
+              </InputLabel>
+              <Select
+                labelId="type"
+                name="type"
+                label="Роль"
+                value={type}
+                onChange={handleChange}
+              >
+                <MenuItem value={UserRoles.Volunteer}>Волонтер</MenuItem>
+                <MenuItem value={UserRoles.Organizer}>Организатор</MenuItem>
+              </Select>
+            </S.FormControlWrapper>
+            {type === UserRoles.Organizer && (
+            <S.TextFieldWrapper
+              name="companyName"
+              label="Название организации"
+              value={companyName}
+              onChange={handleChange}
+              error={Boolean(companyNameError)}
+              helperText={companyNameError}
+              fullWidth
+              required
+            />
+            )}
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              loading={isLoading}
+              disabled={isLoading}
+            >
+              Зарегистрироваться
+            </LoadingButton>
+          </Box>
+        </div>
+      </S.RegistrationWrapper>
+    </SignLayout>
   );
 };
 

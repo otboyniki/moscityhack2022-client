@@ -1,18 +1,14 @@
 import styled from 'styled-components';
-import { Box, TextField, FormControl } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 const WrapperHalf = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
   padding: 50px 40px;
-`;
-
-const LoginWrapper = styled(WrapperHalf)`
-  color: #fffffe;
-  background: linear-gradient(337deg, rgba(217,55,110,1) 0%, rgba(255,142,60,1) 100%);
 `;
 
 const RegistrationWrapper = styled(WrapperHalf)`
@@ -27,34 +23,18 @@ const Title = styled.h1`
   font-family: 'Montserrat', sans-serif;
 `;
 
-const RegSubtitle = styled.div`
-  margin-top: 15px;
-  text-align: center;
-  font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
-`;
-
 const FormBox = styled(Box)`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 120px;
 `;
 
 const TextFieldWrapper = styled(TextField)`
 height: 90px;
 `;
 
-const FormControlWrapper = styled(FormControl)`
-height: 90px;
-`;
-
 export default {
-  LoginWrapper,
   RegistrationWrapper,
   FormBox,
   Title,
-  RegSubtitle,
   TextFieldWrapper,
-  FormControlWrapper,
 };

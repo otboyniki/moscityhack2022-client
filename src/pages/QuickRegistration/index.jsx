@@ -1,13 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  Box,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
-
 import { LoadingButton } from '@mui/lab';
 
 import {
@@ -22,10 +15,9 @@ import {
   quickRegister,
 } from '@/redux/auth/actions';
 
-import Header from '@/components/Header';
+import SignLayout from '@/ui/SignLayout';
 
-import PageLayout from '@/ui/PageLayout';
-import Container from '@/ui/Container';
+import S from './styles';
 
 const QuickRegistration = () => {
   const dispatch = useDispatch();
@@ -61,60 +53,48 @@ const QuickRegistration = () => {
   } = errors || {};
 
   return (
-    <>
-      <Header />
-      <PageLayout>
-        <Container>
-          <Typography component="h1" variant="h5">
-            Быстрая регистрация
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 3 }}
+    <SignLayout>
+      <S.RegistrationWrapper>
+        <S.Title>
+          Быстрая регистрация
+        </S.Title>
+        <S.FormBox
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <S.TextFieldWrapper
+            name="firstName"
+            label="Имя"
+            value={firstName}
+            onChange={handleChange}
+            error={Boolean(firstNameError)}
+            helperText={firstNameError}
+            fullWidth
+            required
+          />
+          <S.TextFieldWrapper
+            name="communication"
+            label="Почта/телефон"
+            value={communication}
+            onChange={handleChange}
+            error={Boolean(communicationError)}
+            helperText={communicationError}
+            fullWidth
+            required
+          />
+          <LoadingButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            loading={isLoading}
+            disabled={isLoading}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="firstName"
-                  label="Имя"
-                  value={firstName}
-                  onChange={handleChange}
-                  error={Boolean(firstNameError)}
-                  helperText={firstNameError}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="communication"
-                  label="Почта/телефон"
-                  value={communication}
-                  onChange={handleChange}
-                  error={Boolean(communicationError)}
-                  helperText={communicationError}
-                  fullWidth
-                  required
-                />
-              </Grid>
-            </Grid>
-            <LoadingButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              loading={isLoading}
-              disabled={isLoading}
-            >
-              Зарегистрироваться
-            </LoadingButton>
-          </Box>
-        </Container>
-      </PageLayout>
-
-    </>
+            Зарегистрироваться
+          </LoadingButton>
+        </S.FormBox>
+      </S.RegistrationWrapper>
+    </SignLayout>
   );
 };
 
