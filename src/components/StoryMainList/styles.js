@@ -9,34 +9,25 @@ const Container = styled.div`
   background-color: #fffffe;
 `;
 
-const FullsizePreview = styled.div`
+const MediaContainer = styled.div`
   position: relative;
-  ${(props) => `
-    background-image: url('${props.url}');
-  `}
-  background-size: cover;
   width: calc(100% - 390px);
+`;
 
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(13,13,13,0) 0%, rgba(13,13,13,0.9) 100%);
-    width: 100%;
-    height: 400px;
-    z-index: 1;
-  }
+const FullsizeMedia = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 const FullsizeContent = styled.div`
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
   height: 100%;
   padding: 30px 40px;
+  bottom: 60px;
   z-index: 5;
 `;
 
@@ -74,7 +65,6 @@ const List = styled.div`
 const ListItem = styled.div`
   display: flex;
   width: 100%;
-  height: 110px;
   box-sizing: border-box;
   padding: 10px 15px;
   cursor: pointer;
@@ -88,9 +78,10 @@ const ListItem = styled.div`
 `;
 
 const ListItemImage = styled.img`
-  width: 110px;
+  width: 150px;
   height: auto;
   box-sizing: border-box;
+  flex-shrink: 0;
 `;
 
 const ListItemDescription = styled.div`
@@ -117,7 +108,8 @@ const ListItemStatistics = styled.div`
 
 export default {
   Container,
-  FullsizePreview,
+  MediaContainer,
+  FullsizeMedia,
   FullsizeContent,
   Date,
   Title,
