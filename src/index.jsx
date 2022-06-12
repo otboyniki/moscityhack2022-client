@@ -8,6 +8,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { CssBaseline } from '@mui/material';
 
@@ -33,6 +34,29 @@ import history from '@/helpers/history';
 
 import routes from '@/constants/routes';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#ffb448',
+      main: '#ff8e3c',
+      dark: '#f57600',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '',
+      main: '#eff0f3',
+      dark: '',
+      contrastText: '#0d0d0d',
+    },
+    error: {
+      light: '#ed5186',
+      main: '#d9376e',
+      dark: '#c23367',
+      contrastText: '#ffffff',
+    },
+  },
+});
+
 const App = () => {
   const { isAuthorized } = useSelector(getAuthBranch);
   const { phone, email } = useSelector(getUserBranch);
@@ -55,30 +79,32 @@ const App = () => {
     <Router history={history}>
       <CssBaseline />
       <Notifications />
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <NonAuthorizedRoute exact path={routes.login}>
+            <Login />
+          </NonAuthorizedRoute>
+          <NonAuthorizedRoute exact path={routes.registration}>
+            <Registration />
+          </NonAuthorizedRoute>
+          <NonAuthorizedRoute exact path={routes.quickRegistration}>
+            <QuickRegistration />
+          </NonAuthorizedRoute>
+          <NonAuthorizedRoute exact path={routes.registrationConfirm}>
+            <RegistrationConfirm />
+          </NonAuthorizedRoute>
+          <Route exact path={routes.main}>
+            <Main />
+          </Route>
+          <AuthorizedRoute>
+            <AddStory />
+          </AuthorizedRoute>
+          <Route path="*">
+            <Redirect to={routes.login} />
+          </Route>
+        </Switch>
+      </ThemeProvider>
 
-      <Switch>
-        <NonAuthorizedRoute exact path={routes.login}>
-          <Login />
-        </NonAuthorizedRoute>
-        <NonAuthorizedRoute exact path={routes.registration}>
-          <Registration />
-        </NonAuthorizedRoute>
-        <NonAuthorizedRoute exact path={routes.quickRegistration}>
-          <QuickRegistration />
-        </NonAuthorizedRoute>
-        <NonAuthorizedRoute exact path={routes.registrationConfirm}>
-          <RegistrationConfirm />
-        </NonAuthorizedRoute>
-        <Route exact path={routes.main}>
-          <Main />
-        </Route>
-        <AuthorizedRoute>
-          <AddStory />
-        </AuthorizedRoute>
-        <Route path="*">
-          <Redirect to={routes.login} />
-        </Route>
-      </Switch>
     </Router>
   );
 };
