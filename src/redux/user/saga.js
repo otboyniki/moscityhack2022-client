@@ -32,7 +32,7 @@ function* getUserProfile() {
       { exact: true },
     );
 
-    const response = yield call(fetchy, urls.userProfile, {}, {
+    const response = yield call(fetchy, urls.userProfile, null, {
       without401check: isRouteMatched,
     });
 

@@ -1,6 +1,8 @@
 import * as types from './types';
 
-const initialState = {};
+const initialState = {
+  isLoading: true,
+};
 
 const reducer = (state = initialState, { type, payload } = {}) => {
   switch (type) {
