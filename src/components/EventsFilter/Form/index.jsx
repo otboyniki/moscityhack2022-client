@@ -71,7 +71,7 @@ const Form = (props) => {
     onChange({
       location: value,
     });
-  }), []);
+  }, 500), []);
 
   const handleLocationChange = ({ target }) => {
     setLocation(target.value);
@@ -92,7 +92,9 @@ const Form = (props) => {
                 <DatePicker
                   value={filter.since}
                   label="от"
-                  onChange={(value) => onChange('since', value)}
+                  onChange={(value) => onChange({
+                    since: value,
+                  })}
                   renderInput={(params) => (
                     <TextField {...params} />
                   )}
@@ -101,7 +103,9 @@ const Form = (props) => {
               <DatePicker
                 value={filter.until}
                 label="до"
-                onChange={(value) => onChange('until', value)}
+                onChange={(value) => onChange({
+                  until: value,
+                })}
                 renderInput={(params) => (
                   <TextField {...params} />
                 )}
