@@ -18,14 +18,20 @@ const Main = () => (
         <h1>Main</h1>
         <S.EventsSection>
           {EVENTS.map(({
-            id, title, locations, meeting,
+            id,
+            title,
+            locations,
+            meeting,
+            previewId,
           }) => (
             <S.Event>
               <EventPreview
                 key={id}
+                id={id}
                 title={title}
                 locations={locations}
                 meeting={meeting}
+                previewId={previewId}
               />
             </S.Event>
           ))}

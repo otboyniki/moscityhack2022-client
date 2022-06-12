@@ -6,21 +6,23 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import formatDate from '@/helpers/formatDate';
 
-import routes from '@/constants/routes';
+import { BASE_URL } from '@/constants/env';
 
 import S from './styles';
 
 const EventPreview = (props) => {
   const {
+    id,
     title,
     locations,
     meeting = {},
+    previewId,
   } = props;
 
   return (
     <S.PreviewCard>
-      <Link component={NavLink} to={routes.main} underline="none">
-        <S.Image src="https://pgmcpskov.ru/media/thumbs/article/2021/03/skrinshot27-07-2018135630.jpg.0x1000_q85.jpg" />
+      <Link component={NavLink} to={`/events/${id}`} underline="none">
+        <S.Image src={`${BASE_URL}/files/${previewId}`} />
         <S.Text>
           <S.Title>
             {title}

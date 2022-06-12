@@ -16,14 +16,20 @@ const EventsList = () => {
       {events.length > 0 && (
         <S.List>
           {events.map(({
-            id, title, locations, meeting,
+            id,
+            title,
+            locations,
+            meeting,
+            previewId,
           }) => (
             <S.ListItem key={id}>
               <EventPreview
                 key={id}
+                id={id}
                 title={title}
                 locations={locations}
                 meeting={meeting}
+                previewId={previewId}
               />
             </S.ListItem>
           ))}

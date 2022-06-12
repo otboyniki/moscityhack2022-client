@@ -9,15 +9,15 @@ const PreviewCard = styled.div`
 `;
 
 const Image = styled.img`
-    display: block;
-    object-fit: cover;
-    height: 170px;
-    width: 100%;
-    border-radius: 8px 8px 0 0;
+  display: block;
+  object-fit: cover;
+  height: 170px;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
 `;
 
 const Text = styled.div`
-    padding: 16px 16px 24px 16px;
+  padding: 16px 16px 24px 16px;
 `;
 
 const Title = styled.div`
