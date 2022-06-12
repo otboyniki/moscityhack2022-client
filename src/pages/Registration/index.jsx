@@ -68,97 +68,96 @@ const Registration = () => {
   } = errors || {};
 
   return (
-    <S.DarkBackground>
-      <PageLayout>
-        <S.FormContainer>
-          <Button
-            component={NavLink}
-            to={routes.main}
-            variant="outlined"
-            startIcon={<ArrowBackIcon />}
-          >
-            Вернуться на главную
-          </Button>
-          <S.FullWrapper>
-            <S.LoginWrapper>
-              <div>
-                <S.RegTitle>
-                  Уже были у нас?
-                </S.RegTitle>
-                <Button
-                  component={NavLink}
-                  to={routes.login}
-                  variant="outlined"
-                  color="secondary"
-                  size="large"
-                  fullWidth
-                >
-                  Войти
-                </Button>
-                <S.RegSubtitle>
-                  С возвращением!
-                </S.RegSubtitle>
-              </div>
-            </S.LoginWrapper>
-            <S.RegistrationWrapper>
-              <div>
-                <S.RegTitle>
-                  Регистрация
-                </S.RegTitle>
-                <Box
-                  component="form"
-                  onSubmit={handleSubmit}
-                  noValidate
-                >
-                  <div>
-                    <S.TextFieldWrapper
-                      name="firstName"
-                      label="Имя"
-                      value={firstName}
-                      onChange={handleChange}
-                      error={Boolean(firstNameError)}
-                      helperText={firstNameError}
-                      fullWidth
-                      required
-                    />
-                    <S.TextFieldWrapper
-                      name="lastName"
-                      label="Фамилия"
-                      value={lastName}
-                      onChange={handleChange}
-                      error={Boolean(lastNameError)}
-                      helperText={lastNameError}
-                      fullWidth
-                      required
-                    />
-                  </div>
+    <PageLayout isDark>
+      <S.FormContainer>
+        <Button
+          component={NavLink}
+          to={routes.main}
+          variant="outlined"
+          startIcon={<ArrowBackIcon />}
+        >
+          Вернуться на главную
+        </Button>
+        <S.FullWrapper>
+          <S.LoginWrapper>
+            <div>
+              <S.RegTitle>
+                Уже были у нас?
+              </S.RegTitle>
+              <Button
+                component={NavLink}
+                to={routes.login}
+                variant="outlined"
+                color="secondary"
+                size="large"
+                fullWidth
+              >
+                Войти
+              </Button>
+              <S.RegSubtitle>
+                С возвращением!
+              </S.RegSubtitle>
+            </div>
+          </S.LoginWrapper>
+          <S.RegistrationWrapper>
+            <div>
+              <S.RegTitle>
+                Регистрация
+              </S.RegTitle>
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+              >
+                <div>
                   <S.TextFieldWrapper
-                    name="email"
-                    label="Почта"
-                    value={email}
+                    name="firstName"
+                    label="Имя"
+                    value={firstName}
                     onChange={handleChange}
-                    error={Boolean(emailError)}
-                    helperText={emailError}
+                    error={Boolean(firstNameError)}
+                    helperText={firstNameError}
                     fullWidth
                     required
                   />
+                  <S.TextFieldWrapper
+                    name="lastName"
+                    label="Фамилия"
+                    value={lastName}
+                    onChange={handleChange}
+                    error={Boolean(lastNameError)}
+                    helperText={lastNameError}
+                    fullWidth
+                    required
+                  />
+                </div>
+                <S.TextFieldWrapper
+                  name="email"
+                  label="Почта"
+                  value={email}
+                  onChange={handleChange}
+                  error={Boolean(emailError)}
+                  helperText={emailError}
+                  fullWidth
+                  required
+                />
 
-                  <S.FormControlWrapper fullWidth>
-                    <InputLabel id="type">
-                      Роль
-                    </InputLabel>
-                    <Select
-                      labelId="type"
-                      name="type"
-                      label="Роль"
-                      value={type}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={UserRoles.Volunteer}>Волонтер</MenuItem>
-                      <MenuItem value={UserRoles.Organizer}>Организатор</MenuItem>
-                    </Select>
-                  </S.FormControlWrapper>
-                  {type === UserRoles.Organizer && (
+                <S.FormControlWrapper fullWidth>
+                  <InputLabel id="type">
+                    Роль
+                  </InputLabel>
+                  <Select
+                    labelId="type"
+                    name="type"
+                    label="Роль"
+                    value={type}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={UserRoles.Volunteer}>Волонтер</MenuItem>
+                    <MenuItem value={UserRoles.Organizer}>Организатор</MenuItem>
+                  </Select>
+                </S.FormControlWrapper>
+                {type === UserRoles.Organizer && (
                   <S.TextFieldWrapper
                     name="companyName"
                     label="Название организации"
@@ -169,24 +168,23 @@ const Registration = () => {
                     fullWidth
                     required
                   />
-                  )}
-                  <LoadingButton
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    loading={isLoading}
-                    disabled={isLoading}
-                  >
-                    Зарегистрироваться
-                  </LoadingButton>
-                </Box>
-              </div>
-            </S.RegistrationWrapper>
-          </S.FullWrapper>
-        </S.FormContainer>
-      </PageLayout>
-    </S.DarkBackground>
+                )}
+                <LoadingButton
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  loading={isLoading}
+                  disabled={isLoading}
+                >
+                  Зарегистрироваться
+                </LoadingButton>
+              </Box>
+            </div>
+          </S.RegistrationWrapper>
+        </S.FullWrapper>
+      </S.FormContainer>
+    </PageLayout>
   );
 };
 

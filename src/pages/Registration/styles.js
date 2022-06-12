@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { Box, TextField, FormControl } from '@mui/material';
 
-const DarkBackground = styled.div`
-  position: relative;
-  background-color: #eff0f3;
-`;
-
 const FormContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -80,7 +75,6 @@ height: 90px;
 `;
 
 export default {
-  DarkBackground,
   FormContainer,
   FullWrapper,
   LoginWrapper,
