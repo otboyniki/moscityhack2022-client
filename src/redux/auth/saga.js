@@ -217,7 +217,7 @@ function* confirmRegistration() {
 
     localStorage.setItem('isAuthorized', true);
 
-    history.push(routes.main);
+    window.location.href = routes.main;
   } catch (e) {
     console.warn(e);
 
