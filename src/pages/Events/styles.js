@@ -23,8 +23,16 @@ const List = styled.div`
   }
 `;
 
+const Title = styled.div`
+  align-items: center;
+  justify-content: space-between;
+
+  display: flex;
+`;
+
 export default {
   Content,
   Filter,
   List,
+  Title,
 };

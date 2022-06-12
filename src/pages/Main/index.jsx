@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Typography } from '@mui/material';
+import { Button, Link, Typography } from '@mui/material';
 
 import { NavLink } from 'react-router-dom';
 import { getEvents } from '@/redux/events/actions';
@@ -9,6 +9,7 @@ import { getMainEventsReviews } from '@/redux/main/actions';
 import { getMainBranch } from '@/redux/main/selectors';
 import { getStories } from '@/redux/stories/actions';
 import { getStoriesBranch } from '@/redux/stories/selectors';
+import { getUserBranch } from '@/redux/user/selectors';
 
 import Header from '@/components/Header';
 import StoryMainList from '@/components/StoryMainList';
@@ -20,12 +21,14 @@ import PageLayout from '@/ui/PageLayout';
 import PageLoader from '@/ui/PageLoader';
 
 import routes from '@/constants/routes';
+import { UserRoles } from '@/constants/enums';
 
 import S from './styles';
 
 const Main = () => {
   const dispatch = useDispatch();
 
+  const { profileType } = useSelector(getUserBranch);
   const { data: events } = useSelector(getEventsBranch);
   const { reviews } = useSelector(getMainBranch);
   const { items: stories } = useSelector(getStoriesBranch);
@@ -49,6 +52,15 @@ const Main = () => {
             <Typography component="h1" variant="h5">
               Ближайшие события
             </Typography>
+            {profileType === UserRoles.Organizer && (
+              <Button
+                component={NavLink}
+                to={routes.addEvent}
+                variant="contained"
+              >
+                Добавить событие
+              </Button>
+            )}
           </S.Subtitle>
           {!events && (
             <PageLoader />

@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   data: null,
   isToggling: false,
+  activeSpecialization: 0,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -43,6 +44,13 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isToggling: false,
+      };
+    }
+
+    case types.SET_ACTIVE_SPECIALIZATION: {
+      return {
+        ...state,
+        activeSpecialization: payload.id,
       };
     }
 

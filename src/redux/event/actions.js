@@ -35,6 +35,11 @@ export const joinEventFail = () => ({
   type: types.JOIN_EVENT_FAIL,
 });
 
+export const setActiveSpecialization = (data) => ({
+  type: types.SET_ACTIVE_SPECIALIZATION,
+  payload: data,
+});
+
 export const clearEvent = () => ({
   type: types.CLEAR_EVENT,
 });

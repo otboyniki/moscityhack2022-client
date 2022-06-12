@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -11,7 +11,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 
 import { NavLink } from 'react-router-dom';
-import { joinEvent } from '@/redux/event/actions';
+import { joinEvent, setActiveSpecialization } from '@/redux/event/actions';
 import { getEventBranch } from '@/redux/event/selectors';
 import { getAuthBranch } from '@/redux/auth/selectors';
 
@@ -20,10 +20,9 @@ import routes from '@/constants/routes';
 import S from './styles';
 
 const EventSpecializations = () => {
-  const [activeTab, setActiveTab] = useState(0);
   const { isAuthorized } = useSelector(getAuthBranch);
 
-  const { data, isToggling } = useSelector(getEventBranch);
+  const { data, isToggling, activeSpecialization } = useSelector(getEventBranch);
 
   const dispatch = useDispatch();
 
@@ -32,6 +31,12 @@ const EventSpecializations = () => {
       eventId: data.id,
       specializationId: id,
       isParticipant,
+    }));
+  };
+
+  const handleChangeActiveSpecialization = (_, id) => {
+    dispatch(setActiveSpecialization({
+      id,
     }));
   };
 
@@ -45,8 +50,8 @@ const EventSpecializations = () => {
       <S.Tabs>
         <Tabs
           orientation="vertical"
-          value={activeTab}
-          onChange={(_, tab) => setActiveTab(tab)}
+          value={activeSpecialization}
+          onChange={handleChangeActiveSpecialization}
         >
           {data.specializations.map(({ id, title }) => (
             <Tab
@@ -67,9 +72,9 @@ const EventSpecializations = () => {
         }, index) => (
           <div
             key={id}
-            hidden={activeTab !== index}
+            hidden={activeSpecialization !== index}
           >
-            {activeTab === index && (
+            {activeSpecialization === index && (
               <S.Tab>
                 <S.Block>
                   <Typography variant="subtitle2">
