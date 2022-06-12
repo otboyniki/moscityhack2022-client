@@ -9,10 +9,11 @@ export const mapFilter = (filter) => ({
   until: filter.until
     ? new Date(filter.until).toISOString()
     : null,
-  isOnline: filter.format.length === 1
+  isOnline: filter.format && filter.format.length === 1
     ? filter.format.includes(EventFormats.Online)
     : null,
   fromAge: filter.fromAge,
   toAge: filter.toAge,
   stringLocation: filter.location,
+  isArchived: filter.isArchived,
 });

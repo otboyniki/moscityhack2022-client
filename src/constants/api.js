@@ -8,4 +8,5 @@ export default {
   stories: '/stories',
   userProfile: '/user/profile',
   events: '/events',
+  mainEventsReviews: '/main/events-reviews',
 };

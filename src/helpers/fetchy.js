@@ -3,7 +3,7 @@ import URI from 'urijs';
 import { BASE_URL } from '@/constants/env';
 import routes from '@/constants/routes';
 
-const fetchy = async (url, body, options) => {
+const fetchy = async (url, body, options = {}) => {
   const baseOptions = body
     ? {
       method: 'POST',

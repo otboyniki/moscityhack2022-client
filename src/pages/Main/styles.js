@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+const Subtitle = styled.div`
+  justify-content: space-between;
+  align-items: center;
+
+  display: flex;
+
+  margin-bottom: 24px;
+  width: 100%;
+`;
+
 const EventsSection = styled.section`
   flex-wrap: wrap;
 
@@ -31,6 +41,7 @@ const StoriesSectionContent = styled.section`
 `;
 
 export default {
+  Subtitle,
   Event,
   StoriesSection,
   StoriesSectionContent,

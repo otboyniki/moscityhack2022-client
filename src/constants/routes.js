@@ -7,4 +7,5 @@ export default {
   addStory: '/add-story',
   events: '/events',
   event: '/events/:id',
+  addReview: '/add-review',
 };

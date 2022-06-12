@@ -11,7 +11,9 @@ const Container = styled.div`
 
 const FullsizePreview = styled.div`
   position: relative;
-  background-image: url('https://ruzaregion.ru/upload/news/2022/06/10/cE9onZl6b9KwPeVErf2-vhAjN-HoNxyeon2I7nUaEnWIm9BXSol3PdVk1UMRReBlZQycam5chj2UYg65Uiu2hlZo.jpg');
+  ${(props) => `
+    background-image: url('${props.url}');
+  `}
   background-size: cover;
   width: calc(100% - 390px);
 
