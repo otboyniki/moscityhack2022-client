@@ -15,6 +15,7 @@ const fetchy = async (url, body, options) => {
     : {};
 
   const response = await fetch(URI(`${BASE_URL}/${url}`).normalizePath(), {
+    credentials: 'include',
     ...baseOptions,
     ...options,
   });
