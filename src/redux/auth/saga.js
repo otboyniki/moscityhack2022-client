@@ -59,8 +59,6 @@ function* login() {
       throw response;
     }
 
-    yield put(AuthActions.loginSuccess());
-
     history.push(`${routes.registrationConfirm}?id=${response.id}`);
   } catch (e) {
     console.warn(e);
@@ -207,13 +205,7 @@ function* confirmRegistration() {
       code,
     };
 
-    const response = yield call(fetchy, urls.registrationConfirm, body);
-
-    if (!response) {
-      throw response;
-    }
-
-    yield put(AuthActions.confirmRegistrationSuccess());
+    yield call(fetchy, urls.registrationConfirm, body);
 
     localStorage.setItem('isAuthorized', true);
 
