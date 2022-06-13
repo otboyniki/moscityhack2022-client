@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { NavLink } from 'react-router-dom';
 import { getEvents } from '@/redux/events/actions';
@@ -77,9 +77,13 @@ const Main = () => {
               <Title>
                 Наши истории
               </Title>
-              <Link component={NavLink} to={routes.addStory}>
+              <Button
+                component={NavLink}
+                to={routes.addStory}
+                variant="contained"
+              >
                 Добавить историю
-              </Link>
+              </Button>
             </S.Subtitle>
             {!stories && (
               <PageLoader />

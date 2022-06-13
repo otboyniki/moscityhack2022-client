@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Link,
+  Button,
   Tab,
   Tabs,
   Typography,
@@ -136,9 +136,13 @@ const EventSpecializations = () => {
                   </Typography>
                 </S.Block>
                 {!isAuthorized && (
-                  <Link component={NavLink} to={routes.quickRegistration}>
+                  <Button
+                    component={NavLink}
+                    to={routes.quickRegistration}
+                    variant="contained"
+                  >
                     Участвовать
-                  </Link>
+                  </Button>
                 )}
                 {isAuthorized && (
                   <LoadingButton
