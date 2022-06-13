@@ -96,7 +96,7 @@ const Events = () => {
                 <PageLoader />
               )}
               {events && (
-                <EventsList />
+                <EventsList eventsPerLine={2} />
               )}
             </S.List>
           </S.Content>

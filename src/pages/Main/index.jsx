@@ -67,7 +67,7 @@ const Main = () => {
             <PageLoader />
           )}
           {events && (
-            <EventsList />
+            <EventsList eventsPerLine={3} />
           )}
         </Container>
 
