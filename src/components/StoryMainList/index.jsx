@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-shadow */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CommentIcon from '@mui/icons-material/Comment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -12,50 +12,67 @@ import formatDate from '@/helpers/formatDate';
 
 import { BASE_URL } from '@/constants/env';
 import { StoryTypes } from '@/constants/enums';
-import routes from '@/constants/routes';
 
 import S from './styles';
+import routes from '@/constants/routes';
 
 const StoryMainList = () => {
   const { items: stories } = useSelector(getStoriesBranch);
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const activeElementRef = useRef(null);
 
-  const [activeStory, setActiveStory] = useState(0);
+  const playClickHandler = () => {
+    activeElementRef.current.play();
+    setIsVideoPlaying(true);
+  };
 
-  const firstStory = stories[activeStory];
+  const selectedStory = stories[activeStoryIndex];
 
-  const Media = firstStory.format === StoryTypes.Video
+  const Media = selectedStory.format === StoryTypes.Video
     ? 'video'
     : 'img';
 
-  const MediaProps = firstStory.format === StoryTypes.Video
-    ? { controls: true }
+  const MediaProps = selectedStory.format === StoryTypes.Video
+    ? { controls: isVideoPlaying }
     : { alt: 'Preview' };
 
   return (
     <S.Container>
-      <S.MediaContainer>
-        <S.FullsizeMedia as={Media} {...MediaProps} src={`${BASE_URL}/files/${firstStory.previewId}`} />
-        <S.FullsizeContent>
-          <S.Date>{formatDate(firstStory.date)}</S.Date>
-          <div>
-            <S.Title to={`${routes.stories}/${firstStory.id}`}>
-              {firstStory.title}
+      <S.MediaContainer isVideoPlaying={isVideoPlaying}>
+        <S.FullsizeMedia
+          format={Media}
+          as={Media}
+          {...MediaProps}
+          src={`${BASE_URL}/files/${selectedStory.previewId}`}
+          ref={activeElementRef}
+        />
+        <S.FullsizeContent isVideoPlaying={isVideoPlaying}>
+          {!isVideoPlaying && (
+            <S.Date>{formatDate(selectedStory.date)}</S.Date>
+          )}
+          {selectedStory.format === StoryTypes.Video && !isVideoPlaying && (
+            <S.PlayButton sx={{ fontSize: 90 }} onClick={playClickHandler} />
+          )}
+          <S.StoryDescription isVideoPlaying={isVideoPlaying}>
+            <S.Title to={`${routes.stories}/${selectedStory.id}`} isVideoPlaying={isVideoPlaying}>
+              {selectedStory.title}
             </S.Title>
             <S.Statistics>
               <S.StatisticRow>
                 <CommentIcon />
-                {firstStory.commentsCount}
+                {selectedStory.commentsCount}
               </S.StatisticRow>
               <S.StatisticRow>
                 <VisibilityIcon />
-                {firstStory.viewsCount}
+                {selectedStory.viewsCount}
               </S.StatisticRow>
               <S.StatisticRow>
                 <StarIcon />
-                {`${firstStory.score > 0 ? `+${firstStory.score}` : firstStory.score}`}
+                {`${selectedStory.score > 0 ? `+${selectedStory.score}` : selectedStory.score}`}
               </S.StatisticRow>
             </S.Statistics>
-          </div>
+          </S.StoryDescription>
         </S.FullsizeContent>
       </S.MediaContainer>
 
@@ -73,16 +90,20 @@ const StoryMainList = () => {
             : 'img';
 
           const MediaProps = format === StoryTypes.Video
-            ? { controls: true }
+            ? { controls: false }
             : { alt: 'Preview' };
 
           return (
             <S.ListItem
               key={id}
               id={id}
-              isActive={activeStory === index}
-              onClick={() => setActiveStory(index)}
+              isActive={activeStoryIndex === index}
+              onClick={() => {
+                setActiveStoryIndex(index);
+                setIsVideoPlaying(false);
+              }}
             >
+              {format === StoryTypes.Video && <S.PlayButton sx={{ fontSize: 35 }} />}
               <S.ListItemImage as={Media} {...MediaProps} src={`${BASE_URL}/files/${previewId}`} />
               <S.ListItemDescription>
                 <S.ListItemTitle>{title}</S.ListItemTitle>
@@ -97,7 +118,7 @@ const StoryMainList = () => {
                   </S.StatisticRow>
                   <S.StatisticRow>
                     <StarIcon fontSize="inherit" />
-                    {`${firstStory.score > 0 ? `+${firstStory.score}` : firstStory.score}`}
+                    {`${selectedStory.score > 0 ? `+${selectedStory.score}` : selectedStory.score}`}
                   </S.StatisticRow>
                 </S.ListItemStatistics>
               </S.ListItemDescription>
