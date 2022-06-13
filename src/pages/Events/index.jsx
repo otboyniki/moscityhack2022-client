@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useLocation, NavLink } from 'react-router-dom';
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { getEventsBranch } from '@/redux/events/selectors';
 import { clearEvents, getEvents } from '@/redux/events/actions';
@@ -18,6 +18,7 @@ import EventsList from '@/components/EventsList';
 import Container from '@/ui/Container';
 import PageLayout from '@/ui/PageLayout';
 import PageLoader from '@/ui/PageLoader';
+import Title from '@/ui/Title';
 
 import routes from '@/constants/routes';
 import { UserRoles } from '@/constants/enums';
@@ -78,9 +79,9 @@ const Events = () => {
             </S.Filter>
             <S.List>
               <S.Title>
-                <Typography component="h1" variant="h5">
+                <Title>
                   Список событий
-                </Typography>
+                </Title>
                 {profileType === UserRoles.Organizer && (
                   <Button
                     component={NavLink}

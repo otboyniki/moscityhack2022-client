@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Link, Typography } from '@mui/material';
+import { Button, Link } from '@mui/material';
 
 import { NavLink } from 'react-router-dom';
 import { getEvents } from '@/redux/events/actions';
@@ -16,6 +16,7 @@ import StoryMainList from '@/components/StoryMainList';
 import EventsList from '@/components/EventsList';
 import ReviewsList from '@/components/ReviewsList';
 
+import Title from '@/ui/Title';
 import Container from '@/ui/Container';
 import PageLayout from '@/ui/PageLayout';
 import PageLoader from '@/ui/PageLoader';
@@ -49,9 +50,9 @@ const Main = () => {
       <PageLayout>
         <Container>
           <S.Subtitle>
-            <Typography component="h1" variant="h5">
+            <Title>
               Ближайшие события
-            </Typography>
+            </Title>
             {profileType === UserRoles.Organizer && (
               <Button
                 component={NavLink}
@@ -73,9 +74,9 @@ const Main = () => {
         <S.StoriesSection>
           <S.StoriesSectionContent>
             <S.Subtitle>
-              <Typography component="h1" variant="h5">
+              <Title>
                 Наши истории
-              </Typography>
+              </Title>
               <Link component={NavLink} to={routes.addStory}>
                 Добавить историю
               </Link>
@@ -91,9 +92,9 @@ const Main = () => {
 
         <Container>
           <S.Subtitle>
-            <Typography component="h1" variant="h5">
+            <Title>
               Отзывы на наши мероприятия
-            </Typography>
+            </Title>
           </S.Subtitle>
           {!reviews && (
             <PageLoader />
