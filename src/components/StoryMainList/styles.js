@@ -23,10 +23,13 @@ const MediaContainer = styled.div`
 const FullsizeMedia = styled.div`
   width: 100%;
   height: 100%;
-
   object-fit: contain;
   overflow: hidden;
   border-radius: 8px 0 0 8px;
+  
+  ${({ format }) => format === 'img' && css`
+    object-fit: cover;
+  `}
 `;
 
 const FullsizeContent = styled.div`

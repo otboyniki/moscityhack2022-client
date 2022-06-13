@@ -40,6 +40,7 @@ const StoryMainList = () => {
     <S.Container>
       <S.MediaContainer isVideoPlaying={isVideoPlaying}>
         <S.FullsizeMedia
+          format={Media}
           as={Media}
           {...MediaProps}
           src={`${BASE_URL}/files/${selectedStory.previewId}`}
