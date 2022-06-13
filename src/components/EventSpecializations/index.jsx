@@ -14,13 +14,16 @@ import { NavLink } from 'react-router-dom';
 import { joinEvent, setActiveSpecialization } from '@/redux/event/actions';
 import { getEventBranch } from '@/redux/event/selectors';
 import { getAuthBranch } from '@/redux/auth/selectors';
+import { getUserBranch } from '@/redux/user/selectors';
 
 import routes from '@/constants/routes';
+import { UserRoles } from '@/constants/enums';
 
 import S from './styles';
 
 const EventSpecializations = () => {
   const { isAuthorized } = useSelector(getAuthBranch);
+  const { profileType } = useSelector(getUserBranch);
 
   const { data, isToggling, activeSpecialization } = useSelector(getEventBranch);
 
@@ -135,24 +138,28 @@ const EventSpecializations = () => {
                     {maxVolunteersNumber}
                   </Typography>
                 </S.Block>
-                {!isAuthorized && (
-                  <Button
-                    component={NavLink}
-                    to={`${routes.quickRegistration}?eventId=${data.id}&specializationId=${id}`}
-                    variant="contained"
-                  >
-                    Участвовать
-                  </Button>
-                )}
-                {isAuthorized && (
-                  <LoadingButton
-                    variant="contained"
-                    onClick={() => handleClick({ id, isParticipant })}
-                    loading={isToggling}
-                    disabled={isToggling}
-                  >
-                    {isParticipant ? 'Отказаться от участия' : 'Участвовать'}
-                  </LoadingButton>
+                {profileType !== UserRoles.Organizer && (
+                  <>
+                    {!isAuthorized && (
+                      <Button
+                        component={NavLink}
+                        to={`${routes.quickRegistration}?eventId=${data.id}&specializationId=${id}`}
+                        variant="contained"
+                      >
+                        Участвовать
+                      </Button>
+                    )}
+                    {isAuthorized && (
+                      <LoadingButton
+                        variant="contained"
+                        onClick={() => handleClick({ id, isParticipant })}
+                        loading={isToggling}
+                        disabled={isToggling}
+                      >
+                        {isParticipant ? 'Отказаться от участия' : 'Участвовать'}
+                      </LoadingButton>
+                    )}
+                  </>
                 )}
               </S.Tab>
             )}
