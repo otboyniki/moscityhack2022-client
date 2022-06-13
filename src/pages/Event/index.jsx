@@ -23,9 +23,7 @@ const Event = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const {
-    data,
-  } = useSelector(getEventBranch);
+  const { data } = useSelector(getEventBranch);
 
   useEffect(() => {
     dispatch(getEvent({ id }));

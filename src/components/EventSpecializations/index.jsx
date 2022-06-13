@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 
 import { LoadingButton } from '@mui/lab';
-
 import { NavLink } from 'react-router-dom';
+
 import { joinEvent, setActiveSpecialization } from '@/redux/event/actions';
 import { getEventBranch } from '@/redux/event/selectors';
 import { getAuthBranch } from '@/redux/auth/selectors';
@@ -138,7 +138,7 @@ const EventSpecializations = () => {
                 {!isAuthorized && (
                   <Button
                     component={NavLink}
-                    to={routes.quickRegistration}
+                    to={`${routes.quickRegistration}?eventId=${data.id}&specializationId=${id}`}
                     variant="contained"
                   >
                     Участвовать

@@ -28,6 +28,7 @@ import {
   QUICK_REGISTER_VALIDATORS,
   REGISTER_VALIDATORS,
 } from './constants';
+import { stringifyUrl } from '@/helpers/stringifyUrl';
 
 function* login() {
   try {
@@ -163,13 +164,20 @@ function* quickRegister() {
 
     const response = yield call(fetchy, urls.quickRegistration, body);
 
-    if (!response) {
-      throw response;
-    }
+    const {
+      eventId,
+      specializationId,
+    } = getQueryParams();
+
+    const url = stringifyUrl({
+      id: response.id,
+      eventId,
+      specializationId,
+    }, routes.registrationConfirm);
 
     yield put(AuthActions.quickRegisterSuccess());
 
-    history.push(`${routes.registrationConfirm}?id=${response.id}`);
+    history.push(url);
   } catch (e) {
     console.warn(e);
 
@@ -198,7 +206,11 @@ function* confirmRegistration() {
       return;
     }
 
-    const { id } = getQueryParams();
+    const {
+      id,
+      eventId,
+      specializationId,
+    } = getQueryParams();
 
     const body = {
       id,
@@ -206,10 +218,11 @@ function* confirmRegistration() {
     };
 
     yield call(fetchy, urls.registrationConfirm, body);
+    yield call(fetchy, `${urls.events}/${eventId}/specializations/${specializationId}/join`, {});
 
     localStorage.setItem('isAuthorized', true);
 
-    window.location.href = routes.main;
+    window.location.href = `${routes.events}/${eventId}`;
   } catch (e) {
     console.warn(e);
 

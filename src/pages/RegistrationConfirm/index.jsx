@@ -41,9 +41,13 @@ const RegistrationConfirm = () => {
     dispatch(clearAuth());
   }, []);
 
-  const { id } = getQueryParams();
+  const {
+    id,
+    eventId,
+    specializationId,
+  } = getQueryParams();
 
-  if (!id) {
+  if (!id || !eventId || !specializationId) {
     return (
       <Redirect to={routes.main} />
     );
