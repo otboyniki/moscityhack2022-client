@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState } from 'react';
@@ -86,7 +88,15 @@ const AddStoryForm = () => {
     event.preventDefault();
 
     dispatch(addStory({
-      description: convertToHTML(editorState.getCurrentContent()),
+      description: convertToHTML({
+        entityToHTML: (entity, originalText) => {
+          if (entity.type === 'IMAGE') {
+            return <img alt="image" src={entity.data.src} />;
+          }
+
+          return originalText;
+        },
+      })(editorState.getCurrentContent()),
     }));
   };
 
