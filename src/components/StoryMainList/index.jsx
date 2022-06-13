@@ -12,6 +12,7 @@ import formatDate from '@/helpers/formatDate';
 
 import { BASE_URL } from '@/constants/env';
 import { StoryTypes } from '@/constants/enums';
+import routes from '@/constants/routes';
 
 import S from './styles';
 
@@ -37,7 +38,7 @@ const StoryMainList = () => {
         <S.FullsizeContent>
           <S.Date>{formatDate(firstStory.date)}</S.Date>
           <div>
-            <S.Title>
+            <S.Title to={`${routes.stories}/${firstStory.id}`}>
               {firstStory.title}
             </S.Title>
             <S.Statistics>

@@ -1,92 +1,92 @@
 import {
-  call,
-  put,
-  select,
-  takeLatest,
+  call, put, takeLatest,
 } from 'redux-saga/effects';
 
 import fetchy from '@/helpers/fetchy';
-import validate from '@/helpers/validate';
-import history from '@/helpers/history';
 
 import urls from '@/constants/api';
-import { StoryTypes } from '@/constants/enums';
-import routes from '@/constants/routes';
 
 import { showNotification } from '../notifications/actions';
 
 import * as Actions from './actions';
 import * as Types from './types';
-import { getStoryBranch } from './selectors';
-import { VALIDATORS } from './constants';
 
-function* addStory({ payload }) {
+function* getStoryBase({ payload }) {
+  const response = yield call(fetchy, `${urls.stories}/${payload.id}`);
+
+  yield put(Actions.getStorySuccess(response));
+}
+
+function* getStory({ payload }) {
   try {
-    yield put(Actions.addStoryRequest());
+    yield put(Actions.getStoryRequest());
 
-    const {
-      previewId,
-      format,
-      activityIds,
-      title,
-      shortDescription,
-    } = yield select(getStoryBranch);
-
-    const { hasErrors, errors } = validate(VALIDATORS)({
-      description: payload.description,
-      previewId,
-      format,
-      activityIds,
-      title,
-      shortDescription,
-    });
-
-    if (hasErrors) {
-      yield put(Actions.setValidation(errors));
-      yield put(Actions.addStoryFail());
-
-      return;
-    }
-
-    const body = {
-      title,
-      format,
-      activityIds,
-    };
-
-    if (format === StoryTypes.Text) {
-      body.description = payload.description;
-      body.shortDescription = shortDescription;
-    } else {
-      body.previewId = previewId;
-    }
-
-    yield call(fetchy, urls.stories, body);
-
-    yield put(Actions.addStorySuccess());
-
-    yield put(showNotification({
-      id: 'add-story',
-      type: 'success',
-      text: 'История создана успешно!',
-    }));
-
-    history.push(routes.main);
+    yield call(getStoryBase, { payload });
   } catch (e) {
     console.warn(e);
 
-    yield put(Actions.addStoryFail());
+    yield put(Actions.getStoryFail());
 
     yield put(showNotification({
-      id: 'add-story',
+      id: 'get-story',
       type: 'error',
-      text: 'Произошла ошибка при добавлении истории, пожалуйста, попробуйте позже',
+      text: 'Произошла ошибка при получении информации об истории, пожалуйста, попробуйте позже.',
     }));
   }
 }
 
-function* storySaga() {
-  yield takeLatest(Types.ADD_STORY, addStory);
+function* addComment({ payload }) {
+  try {
+    yield put(Actions.addCommentRequest());
+
+    const body = {
+      text: payload.text,
+    };
+
+    yield call(fetchy, `${urls.stories}/${payload.storyId}/comment`, body);
+
+    yield call(getStoryBase, { payload: { id: payload.storyId } });
+
+    yield put(Actions.addCommentSuccess());
+  } catch (e) {
+    console.warn(e);
+
+    yield put(Actions.addCommentFail());
+
+    yield put(showNotification({
+      id: 'add-comment',
+      type: 'error',
+      text: 'Произошла ошибка при добавлении комментария, пожалуйста, попробуйте позже.',
+    }));
+  }
 }
 
-export default storySaga;
+function* setCommentRating({ payload }) {
+  try {
+    yield put(Actions.setCommentRatingRequest(payload));
+
+    yield call(fetchy, `${urls.stories}/${payload.storyId}/comment/${payload.commentId}/${payload.ratingChangeType}`, {});
+
+    yield call(getStoryBase, { payload: { id: payload.storyId } });
+
+    yield put(Actions.setCommentRatingSuccess());
+  } catch (e) {
+    console.warn(e);
+
+    yield put(Actions.setCommentRatingFail());
+
+    yield put(showNotification({
+      id: 'set-comment-rating',
+      type: 'error',
+      text: 'Произошла ошибка при обновлении комментария, пожалуйста, попробуйте позже.',
+    }));
+  }
+}
+
+function* getStorySaga() {
+  yield takeLatest(Types.GET_STORY, getStory);
+  yield takeLatest(Types.ADD_COMMENT, addComment);
+  yield takeLatest(Types.SET_COMMENT_RATING, setCommentRating);
+}
+
+export default getStorySaga;

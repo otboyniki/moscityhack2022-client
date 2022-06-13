@@ -17,8 +17,6 @@ import PageLoader from '@/ui/PageLoader';
 
 import { BASE_URL } from '@/constants/env';
 
-import EventPreviewTemplate from '@/assets/event_preview_template.png';
-
 import S from './styles';
 
 const Event = () => {
@@ -62,7 +60,7 @@ const Event = () => {
                   <S.Preview>
                     <img
                       alt="preview"
-                      src={previewId ? `${BASE_URL}/files/${previewId}` : EventPreviewTemplate}
+                      src={`${BASE_URL}/files/${previewId}`}
                     />
                   </S.Preview>
                   <S.Block>

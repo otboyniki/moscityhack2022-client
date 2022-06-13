@@ -1,34 +1,58 @@
 import * as types from './types';
 
-export const setStory = (data) => ({
-  type: types.SET_STORY,
+export const getStory = (data) => ({
+  type: types.GET_STORY,
   payload: data,
 });
 
-export const setValidation = (data) => ({
-  type: types.SET_VALIDATION,
+export const getStoryRequest = () => ({
+  type: types.GET_STORY_REQUEST,
+});
+
+export const getStorySuccess = (data) => ({
+  type: types.GET_STORY_SUCCESS,
   payload: data,
 });
 
-export const clearValidation = () => ({
-  type: types.CLEAR_VALIDATION,
+export const getStoryFail = () => ({
+  type: types.GET_STORY_FAIL,
 });
 
-export const addStory = (data) => ({
-  type: types.ADD_STORY,
+export const addComment = (data) => ({
+  type: types.ADD_COMMENT,
   payload: data,
 });
 
-export const addStoryRequest = () => ({
-  type: types.ADD_STORY_REQUEST,
+export const addCommentRequest = () => ({
+  type: types.ADD_COMMENT_REQUEST,
 });
 
-export const addStorySuccess = () => ({
-  type: types.ADD_STORY_SUCCESS,
+export const addCommentSuccess = () => ({
+  type: types.ADD_COMMENT_SUCCESS,
 });
 
-export const addStoryFail = () => ({
-  type: types.ADD_STORY_FAIL,
+export const addCommentFail = () => ({
+  type: types.ADD_COMMENT_FAIL,
+});
+
+export const setCommentRating = (data) => ({
+  type: types.SET_COMMENT_RATING,
+  payload: data,
+});
+
+export const setCommentRatingRequest = (data) => ({
+  type: types.SET_COMMENT_RATING_REQUEST,
+  payload: data,
+});
+
+export const setCommentRatingSuccess = (data) => ({
+  type: types.SET_COMMENT_RATING_SUCCESS,
+  payload: data,
+});
+
+export const setCommentRatingFail = (data) => ({
+  type: types.SET_COMMENT_RATING_FAIL,
+  payload: data,
 });
 
 export const clearStory = () => ({

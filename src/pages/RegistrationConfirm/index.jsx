@@ -94,6 +94,7 @@ const RegistrationConfirm = () => {
               margin="normal"
               fullWidth
               required
+              placeholder="Пожалуйста, вводите 7373"
             />
             <LoadingButton
               type="submit"

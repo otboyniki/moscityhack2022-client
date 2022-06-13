@@ -10,4 +10,5 @@ export default {
   addReview: '/add-review',
   stories: '/stories',
   addEvent: '/add-event',
+  story: '/stories/:id',
 };

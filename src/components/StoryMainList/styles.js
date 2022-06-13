@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
@@ -49,12 +50,13 @@ const Date = styled.div`
   width: fit-content;
 `;
 
-const Title = styled.div`
+const Title = styled(NavLink)`
   display: block;
   margin-bottom: 10px;
   color: #ffffff;
   font-size: 24px;
   font-weight: 500;
+  text-decoration: none;
 `;
 
 const Statistics = styled.div`

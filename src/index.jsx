@@ -25,12 +25,14 @@ import AddStory from '@/pages/AddStory';
 import Events from '@/pages/Events';
 import Event from '@/pages/Event';
 import AddEvent from '@/pages/AddEvent';
+import Story from '@/pages/Story';
 
 import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
 
 import AppLoader from '@/ui/AppLoader';
+import ResetScroll from '@/ui/ResetScroll';
 
 import history from '@/helpers/history';
 
@@ -80,6 +82,7 @@ const App = () => {
     <Router history={history}>
       <CssBaseline />
       <Notifications />
+      <ResetScroll />
 
       <ThemeProvider theme={theme}>
         <Switch>
@@ -98,6 +101,9 @@ const App = () => {
           <Route exact path={routes.main}>
             <Main />
           </Route>
+          <AuthorizedRoute exact path={routes.addEvent}>
+            <AddEvent />
+          </AuthorizedRoute>
           <Route exact path={routes.events}>
             <Events />
           </Route>
@@ -107,9 +113,9 @@ const App = () => {
           <AuthorizedRoute exact path={routes.addStory}>
             <AddStory />
           </AuthorizedRoute>
-          <AuthorizedRoute exact path={routes.addEvent}>
-            <AddEvent />
-          </AuthorizedRoute>
+          <Route path={routes.story}>
+            <Story />
+          </Route>
           <Route path="*">
             <Redirect to={routes.login} />
           </Route>

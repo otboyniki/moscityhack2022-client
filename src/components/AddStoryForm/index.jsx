@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
@@ -17,8 +18,8 @@ import {
   Typography,
 } from '@mui/material';
 
-import { getStoryBranch } from '@/redux/story/selectors';
-import { addStory, clearStory, setStory } from '@/redux/story/actions';
+import { getAddStoryBranch } from '@/redux/add-story/selectors';
+import { addStory, clearStory, setStory } from '@/redux/add-story/actions';
 import { getActivitiesBranch } from '@/redux/activities/selectors';
 
 import useUpload from '@/hooks/useUpload';
@@ -42,7 +43,7 @@ const AddStoryForm = () => {
     shortDescription,
     errors,
     title,
-  } = useSelector(getStoryBranch);
+  } = useSelector(getAddStoryBranch);
 
   const { items: activities } = useSelector(getActivitiesBranch);
 

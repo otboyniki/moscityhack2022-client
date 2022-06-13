@@ -22,3 +22,8 @@ export const EVENT_FORMATS = [
   { id: EventFormats.Online, title: 'Онлайн' },
   { id: EventFormats.Offline, title: 'Оффлайн' },
 ];
+
+export const RatingActions = {
+  Like: 'like',
+  Dislike: 'dislike',
+};

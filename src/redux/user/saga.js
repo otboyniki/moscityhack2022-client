@@ -24,6 +24,9 @@ function* getUserProfile() {
       routes.main,
       routes.events,
       routes.event,
+      routes.addEvent,
+      routes.addStory,
+      routes.story,
     ];
 
     const isRouteMatched = matchPathname(
