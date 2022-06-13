@@ -7,7 +7,12 @@ import { RatingActions } from '@/constants/enums';
 import S from './styles';
 
 const Rating = (props) => {
-  const { score, isLoading, onClick } = props;
+  const {
+    score,
+    isLoading,
+    isPositiveScore,
+    onClick,
+  } = props;
 
   return (
     <S.Container>
@@ -16,7 +21,7 @@ const Rating = (props) => {
           loading={isLoading}
           disabled={isLoading}
           variant="contained"
-          color="primary"
+          color={isPositiveScore ? 'primary' : 'secondary'}
           onClick={() => onClick(RatingActions.Like)}
         >
           +
@@ -33,7 +38,7 @@ const Rating = (props) => {
           loading={isLoading}
           disabled={isLoading}
           variant="contained"
-          color="secondary"
+          color={isPositiveScore === false ? 'primary' : 'secondary'}
           onClick={() => onClick(RatingActions.Dislike)}
         >
           -

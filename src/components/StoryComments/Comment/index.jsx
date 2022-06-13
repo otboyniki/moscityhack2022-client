@@ -18,6 +18,7 @@ const Comment = (props) => {
     date,
     score,
     text,
+    isPositiveScore,
     onClick,
   } = props;
 
@@ -47,6 +48,7 @@ const Comment = (props) => {
         {isAuthorized && (
           <Rating
             isLoading={changedRatingCommentId === id}
+            isPositiveScore={isPositiveScore}
             score={score}
             onClick={handleClick}
           />

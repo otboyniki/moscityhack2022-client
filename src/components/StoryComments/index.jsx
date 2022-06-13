@@ -31,6 +31,7 @@ const StoryComments = () => {
         date,
         score,
         text,
+        isPositiveScore,
       }) => (
         <S.Item key={id}>
           <Comment
@@ -39,6 +40,7 @@ const StoryComments = () => {
             date={date}
             score={score}
             text={text}
+            isPositiveScore={isPositiveScore}
             onClick={handleRatingClick}
           />
         </S.Item>
