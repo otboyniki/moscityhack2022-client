@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import isEmpty from 'validator/lib/isEmpty';
 
+import { DRAFT_EDITOR_EMPTY_VALUE } from '@/constants/enums';
+
 export const VALIDATORS = {
   activityId: (value = '') => [
     isEmpty(value) && 'Укажите вид деятельности',
@@ -9,7 +11,7 @@ export const VALIDATORS = {
     isEmpty(value) && 'Укажите название',
   ],
   description: (value = '') => [
-    isEmpty(value) && 'Укажите описание',
+    (isEmpty(value) || value === DRAFT_EDITOR_EMPTY_VALUE) && 'Укажите описание',
   ],
   location: (value = '') => [
     isEmpty(value) && 'Укажите локацию',

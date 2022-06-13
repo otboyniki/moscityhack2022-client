@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import isEmpty from 'validator/lib/isEmpty';
 
-import { StoryTypes } from '@/constants/enums';
+import { DRAFT_EDITOR_EMPTY_VALUE, StoryTypes } from '@/constants/enums';
 
 export const VALIDATORS = {
   format: (value = '') => [
@@ -13,7 +13,7 @@ export const VALIDATORS = {
     }
 
     return [
-      isEmpty(value) && 'Укажите описание',
+      (isEmpty(value) || value === DRAFT_EDITOR_EMPTY_VALUE) && 'Укажите описание',
     ];
   },
   previewId: (value = '', deps) => {

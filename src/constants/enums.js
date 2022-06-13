@@ -27,3 +27,5 @@ export const RatingActions = {
   Like: 'like',
   Dislike: 'dislike',
 };
+
+export const DRAFT_EDITOR_EMPTY_VALUE = '<p></p>';

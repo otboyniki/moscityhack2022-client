@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/media-has-caption */
@@ -23,8 +25,12 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 import {
-  addEvent, clearEvent, clearValidation, setEvent,
+  addEvent,
+  clearEvent,
+  clearValidation,
+  setEvent,
 } from '@/redux/add-event/actions';
+
 import { getActivitiesBranch } from '@/redux/activities/selectors';
 import { getAddEventBranch } from '@/redux/add-event/selectors';
 
@@ -89,6 +95,12 @@ const AddEventForm = () => {
     upload(file);
   };
 
+  const handleEditorChange = (value) => {
+    dispatch(clearValidation());
+
+    setEditorState(value);
+  };
+
   const handleDateChange = (name, value) => {
     dispatch(clearValidation());
 
@@ -101,7 +113,15 @@ const AddEventForm = () => {
     event.preventDefault();
 
     dispatch(addEvent({
-      description: convertToHTML(editorState.getCurrentContent()),
+      description: convertToHTML({
+        entityToHTML: (entity, originalText) => {
+          if (entity.type === 'IMAGE') {
+            return <img alt="image" src={entity.data.src} />;
+          }
+
+          return originalText;
+        },
+      })(editorState.getCurrentContent()),
     }));
   };
 
@@ -112,6 +132,7 @@ const AddEventForm = () => {
     recruitment: [recruitmentError] = [null],
     meeting: [meetingError] = [null],
     terms: [termsError] = [null],
+    description: [descriptionError] = [null],
   } = errors || {};
 
   return (
@@ -154,10 +175,19 @@ const AddEventForm = () => {
         </FormControl>
       </S.Block>
       <S.Block>
-        <Editor
-          editorState={editorState}
-          onChange={setEditorState}
-        />
+        <FormControl
+          fullWidth
+          component="fieldset"
+          error={Boolean(descriptionError)}
+        >
+          <Editor
+            editorState={editorState}
+            onChange={handleEditorChange}
+          />
+          <FormHelperText>
+            {descriptionError}
+          </FormHelperText>
+        </FormControl>
       </S.Block>
       <S.Block>
         <Button

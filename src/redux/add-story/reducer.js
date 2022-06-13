@@ -30,6 +30,13 @@ const reducer = (state = initialState, { type, payload } = {}) => {
       };
     }
 
+    case types.CLEAR_VALIDATION: {
+      return {
+        ...state,
+        errors: null,
+      };
+    }
+
     case types.CLEAR_STORY: {
       return initialState;
     }

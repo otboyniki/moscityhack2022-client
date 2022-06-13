@@ -13,6 +13,7 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -21,7 +22,14 @@ import {
 } from '@mui/material';
 
 import { getAddStoryBranch } from '@/redux/add-story/selectors';
-import { addStory, clearStory, setStory } from '@/redux/add-story/actions';
+
+import {
+  addStory,
+  clearStory,
+  clearValidation,
+  setStory,
+} from '@/redux/add-story/actions';
+
 import { getActivitiesBranch } from '@/redux/activities/selectors';
 
 import useUpload from '@/hooks/useUpload';
@@ -59,18 +67,24 @@ const AddStoryForm = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(clearValidation());
+
     dispatch(setStory({
       previewId: lastUploadedFile,
     }));
   }, [lastUploadedFile]);
 
   const handleChange = ({ target }) => {
+    dispatch(clearValidation());
+
     dispatch(setStory({
       [target.name]: target.value,
     }));
   };
 
   const handleActivitiesChange = ({ target }) => {
+    dispatch(clearValidation());
+
     dispatch(setStory({
       activityIds: target.checked
         ? activityIds.concat(target.name)
@@ -82,6 +96,12 @@ const AddStoryForm = () => {
     const [file] = target.files;
 
     upload(file);
+  };
+
+  const handleEditorChange = (value) => {
+    dispatch(clearValidation());
+
+    setEditorState(value);
   };
 
   const handleSubmit = (event) => {
@@ -103,6 +123,8 @@ const AddStoryForm = () => {
   const {
     shortDescription: [shortDescriptionError] = [null],
     title: [titleError] = [null],
+    activityIds: [activityIdsError] = [null],
+    description: [descriptionError] = [null],
   } = errors || {};
 
   return (
@@ -139,21 +161,25 @@ const AddStoryForm = () => {
         <Typography>
           К чему относится ваша история?
         </Typography>
-        {activities.map(({ id, title }) => (
-          <FormControlLabel
-            key={id}
-            control={(
-              <Checkbox
-                type="checkbox"
-                name={id}
-                value={activityIds.includes(id)}
-                checked={Boolean(activityIds.includes(id))}
-                onChange={handleActivitiesChange}
-              />
-            )}
-            label={title}
-          />
-        ))}
+        <FormControl component="fieldset" error={Boolean(activityIdsError)}>
+          {activities.map(({ id, title }) => (
+            <FormControlLabel
+              key={id}
+              control={(
+                <Checkbox
+                  type="checkbox"
+                  name={id}
+                  value={activityIds.includes(id)}
+                  checked={Boolean(activityIds.includes(id))}
+                  onChange={handleActivitiesChange}
+                />
+              )}
+              label={title}
+            />
+          ))}
+          <FormHelperText>{activityIdsError}</FormHelperText>
+        </FormControl>
+
       </S.Block>
       {format === StoryTypes.Text && (
         <S.Block>
@@ -170,10 +196,19 @@ const AddStoryForm = () => {
       )}
       {format === StoryTypes.Text && (
         <S.Block>
-          <Editor
-            editorState={editorState}
-            onChange={setEditorState}
-          />
+          <FormControl
+            fullWidth
+            component="fieldset"
+            error={Boolean(descriptionError)}
+          >
+            <Editor
+              editorState={editorState}
+              onChange={handleEditorChange}
+            />
+            <FormHelperText>
+              {descriptionError}
+            </FormHelperText>
+          </FormControl>
         </S.Block>
       )}
       {format === StoryTypes.Video && (

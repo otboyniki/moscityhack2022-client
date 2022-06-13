@@ -43,11 +43,9 @@ const RegistrationConfirm = () => {
 
   const {
     id,
-    eventId,
-    specializationId,
   } = getQueryParams();
 
-  if (!id || !eventId || !specializationId) {
+  if (!id) {
     return (
       <Redirect to={routes.main} />
     );

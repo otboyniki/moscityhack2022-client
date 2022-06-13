@@ -218,11 +218,18 @@ function* confirmRegistration() {
     };
 
     yield call(fetchy, urls.registrationConfirm, body);
-    yield call(fetchy, `${urls.events}/${eventId}/specializations/${specializationId}/join`, {});
 
     localStorage.setItem('isAuthorized', true);
 
-    window.location.href = `${routes.events}/${eventId}`;
+    if (eventId && specializationId) {
+      yield call(fetchy, `${urls.events}/${eventId}/specializations/${specializationId}/join`, {});
+    }
+
+    if (eventId && specializationId) {
+      window.location.href = `${routes.events}/${eventId}`;
+    } else {
+      window.location.href = routes.main;
+    }
   } catch (e) {
     console.warn(e);
 
