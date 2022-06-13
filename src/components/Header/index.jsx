@@ -28,9 +28,6 @@ const Header = () => {
         Лого
       </Link>
       <S.Links>
-        <S.CustomLink component={NavLink} to={routes.stories}>
-          Истории
-        </S.CustomLink>
         <S.CustomLink component={NavLink} to={routes.events}>
           Cобытия
         </S.CustomLink>
