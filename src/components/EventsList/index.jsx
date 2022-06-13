@@ -8,7 +8,7 @@ import EventPreview from '../EventPreview';
 
 import S from './styles';
 
-const EventsList = () => {
+const EventsList = ({ eventsPerLine }) => {
   const { data: events } = useSelector(getEventsBranch);
 
   return (
@@ -22,7 +22,7 @@ const EventsList = () => {
             meeting,
             previewId,
           }) => (
-            <S.ListItem key={id}>
+            <S.ListItem key={id} eventsPerLine={eventsPerLine}>
               <EventPreview
                 key={id}
                 id={id}
