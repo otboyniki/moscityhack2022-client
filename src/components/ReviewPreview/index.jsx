@@ -1,47 +1,53 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Avatar from '@mui/material/Avatar';
 
 import formatDate from '@/helpers/formatDate';
 
 import { BASE_URL } from '@/constants/env';
 
 import S from './styles';
+import routes from '@/constants/routes';
 
-const ReviewPreview = (props) => {
-  const {
-    id,
-    title,
-    locations,
-    meeting = {},
-    previewId,
-  } = props;
-
-  return (
-    <S.PreviewCard>
-      <S.CustomLink component={NavLink} to={`/reviews/${id}`} underline="none">
-        <S.Image src={`${BASE_URL}/files/${previewId}`} />
-        <S.Text>
-          <S.Title>
-            {title}
-          </S.Title>
-          <S.Description>
-            <LocationOnIcon />
-            {locations.map(({ stringLocation }) => stringLocation).join(', ')}
-          </S.Description>
-          <S.Description>
-            <CalendarMonthIcon />
-            {formatDate(meeting.since)}
-            {' '}
-            -
-            {' '}
-            {formatDate(meeting.until)}
-          </S.Description>
-        </S.Text>
-      </S.CustomLink>
-    </S.PreviewCard>
-  );
-};
+const ReviewPreview = ({
+  text,
+  avatarId,
+  username,
+  createdAt,
+  goalComplianceRate,
+  eventSummary,
+}) => (
+  <S.ReviewPreviewCard>
+    <S.ReviewHeader>
+      <S.HeaderLeft>
+        <Avatar
+          sx={{ bgcolor: '#ff8e3c', width: 56, height: 56 }}
+          alt={username}
+          src={`${BASE_URL}/files/${avatarId || ''}`}
+        />
+        <S.ReviewInfo>
+          <S.UserName>{username}</S.UserName>
+          <div>{formatDate(createdAt)}</div>
+        </S.ReviewInfo>
+      </S.HeaderLeft>
+      <S.Rating>
+        Рейтинг:
+        {' '}
+        {goalComplianceRate}
+      </S.Rating>
+    </S.ReviewHeader>
+    Про
+    {' '}
+    <S.EventLink
+      component={NavLink}
+      to={`${routes.events}/${eventSummary.eventId}`}
+    >
+      {eventSummary.title}
+    </S.EventLink>
+    <S.ReviewText>
+      {text}
+    </S.ReviewText>
+  </S.ReviewPreviewCard>
+);
 
 export default ReviewPreview;

@@ -12,15 +12,9 @@ const ReviewsList = (props) => {
     <S.Container>
       {items.length > 0 && (
         <S.List>
-          {items.map(({ id, eventSummary }) => (
-            <S.ListItem key={id}>
-              <ReviewPreview
-                id={id}
-                title={eventSummary.title}
-                locations={eventSummary.locations}
-                meeting={eventSummary.meeting}
-                previewId={eventSummary.previewId}
-              />
+          {items.map((review) => (
+            <S.ListItem key={review.id}>
+              <ReviewPreview {...review} />
             </S.ListItem>
           ))}
         </S.List>

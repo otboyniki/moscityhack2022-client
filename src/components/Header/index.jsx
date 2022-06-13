@@ -43,6 +43,7 @@ const Header = () => {
               to={routes.registration}
               variant="contained"
               color="secondary"
+              sx={{ mr: 2 }}
             >
               Регистрация
             </Button>
