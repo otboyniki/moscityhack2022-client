@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -19,7 +19,9 @@ const ListItem = styled.li`
   margin-right: 20px;
   margin-bottom: 26px;
 
-  width: calc((100% - 60px) / 2);
+  ${({ eventsPerLine }) => css`
+    width: calc((100% - 60px) / ${eventsPerLine});
+  `}
 
   @media screen and (max-width: 767px) {
     width: calc((100% - 40px) / 2);
