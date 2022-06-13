@@ -8,7 +8,7 @@ import EventPreview from '../EventPreview';
 
 import S from './styles';
 
-const EventsList = ({ eventsPerLine }) => {
+const EventsList = ({ eventsPerLine = 3 }) => {
   const { data: events } = useSelector(getEventsBranch);
 
   return (
