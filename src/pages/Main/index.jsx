@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-
 import { NavLink } from 'react-router-dom';
+
 import { getEvents } from '@/redux/events/actions';
 import { getEventsBranch } from '@/redux/events/selectors';
 import { getMainEventsReviews } from '@/redux/main/actions';
@@ -10,6 +10,7 @@ import { getMainBranch } from '@/redux/main/selectors';
 import { getStories } from '@/redux/stories/actions';
 import { getStoriesBranch } from '@/redux/stories/selectors';
 import { getUserBranch } from '@/redux/user/selectors';
+import { getAuthBranch } from '@/redux/auth/selectors';
 
 import Header from '@/components/Header';
 import StoryMainList from '@/components/StoryMainList';
@@ -29,6 +30,7 @@ import S from './styles';
 const Main = () => {
   const dispatch = useDispatch();
 
+  const { isAuthorized } = useSelector(getAuthBranch);
   const { profileType } = useSelector(getUserBranch);
   const { data: events } = useSelector(getEventsBranch);
   const { reviews } = useSelector(getMainBranch);
@@ -53,7 +55,7 @@ const Main = () => {
             <Title>
               Ближайшие события
             </Title>
-            {profileType === UserRoles.Organizer && (
+            {isAuthorized && profileType === UserRoles.Organizer && (
               <Button
                 component={NavLink}
                 to={routes.addEvent}
@@ -77,13 +79,15 @@ const Main = () => {
               <Title>
                 Наши истории
               </Title>
-              <Button
-                component={NavLink}
-                to={routes.addStory}
-                variant="contained"
-              >
-                Добавить историю
-              </Button>
+              {isAuthorized && (
+                <Button
+                  component={NavLink}
+                  to={routes.addStory}
+                  variant="contained"
+                >
+                  Добавить историю
+                </Button>
+              )}
             </S.Subtitle>
             {!stories && (
               <PageLoader />
