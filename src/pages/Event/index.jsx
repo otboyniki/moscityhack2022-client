@@ -104,9 +104,7 @@ const Event = () => {
                     <Typography variant="subtitle2">
                       Общее описание функционала / задачи
                     </Typography>
-                    <Typography variant="body2">
-                      {description}
-                    </Typography>
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
                   </S.Block>
                   <S.Block>
                     <Typography variant="subtitle2">

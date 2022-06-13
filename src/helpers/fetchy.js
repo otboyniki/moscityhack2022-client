@@ -31,7 +31,7 @@ const fetchy = async (url, body, options = {}) => {
   }
 
   if (!response.ok) {
-    throw response;
+    // throw response;
   }
 
   if (response.headers.get('content-length') === '0') {

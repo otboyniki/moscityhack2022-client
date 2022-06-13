@@ -4,9 +4,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import S from './styles';
 
 const Accordion = (props) => {
-  const { title, children } = props;
+  const { title, openByDefault = false, children } = props;
 
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(openByDefault);
 
   return (
     <div>

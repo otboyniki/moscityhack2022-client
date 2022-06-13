@@ -8,6 +8,7 @@ import events from '@/redux/events/saga';
 import event from '@/redux/event/saga';
 import main from '@/redux/main/saga';
 import stories from '@/redux/stories/saga';
+import addEvent from '@/redux/add-event/saga';
 
 const sagas = [
   base,
@@ -20,6 +21,7 @@ const sagas = [
   event,
   main,
   stories,
+  addEvent,
 ];
 
 export default sagas;

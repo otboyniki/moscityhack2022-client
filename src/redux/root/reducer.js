@@ -10,6 +10,7 @@ import events from '@/redux/events/reducer';
 import event from '@/redux/event/reducer';
 import main from '@/redux/main/reducer';
 import stories from '@/redux/stories/reducer';
+import addEvent from '@/redux/add-event/reducer';
 
 const reducer = combineReducers({
   base,
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   event,
   main,
   stories,
+  addEvent,
 });
 
 export default reducer;

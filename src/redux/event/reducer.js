@@ -54,6 +54,34 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
+    case types.ADD_SPECIALIZATION: {
+      return {
+        ...state,
+        specializations: state.specializations.concat({
+          title: '',
+          requirements: '',
+          description: '',
+          isOnline: false,
+          ages: {},
+        }),
+      };
+    }
+
+    case types.ADD_EVENT_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case types.ADD_EVENT_SUCCESS:
+    case types.ADD_EVENT_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
     case types.CLEAR_EVENT: {
       return initialState;
     }

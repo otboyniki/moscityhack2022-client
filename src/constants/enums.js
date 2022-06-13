@@ -17,3 +17,8 @@ export const EventFormats = {
   Online: 'online',
   Offline: 'offline',
 };
+
+export const EVENT_FORMATS = [
+  { id: EventFormats.Online, title: 'Онлайн' },
+  { id: EventFormats.Offline, title: 'Оффлайн' },
+];

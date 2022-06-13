@@ -24,6 +24,7 @@ import RegistrationConfirm from '@/pages/RegistrationConfirm';
 import AddStory from '@/pages/AddStory';
 import Events from '@/pages/Events';
 import Event from '@/pages/Event';
+import AddEvent from '@/pages/AddEvent';
 
 import Notifications from '@/components/Notifications';
 import NonAuthorizedRoute from '@/components/NonAuthorizedRoute';
@@ -105,6 +106,9 @@ const App = () => {
           </Route>
           <AuthorizedRoute exact path={routes.addStory}>
             <AddStory />
+          </AuthorizedRoute>
+          <AuthorizedRoute exact path={routes.addEvent}>
+            <AddEvent />
           </AuthorizedRoute>
           <Route path="*">
             <Redirect to={routes.login} />
